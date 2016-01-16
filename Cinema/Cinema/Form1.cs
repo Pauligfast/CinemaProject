@@ -63,7 +63,7 @@ namespace Cinema
             }
             else if (comboBox1.Text.ToString() == "Klaudia")
             {
-                connection = @"SERVER=PASHKO\SQLEXPRESS;Database=Cinema;Trusted_Connection=true";
+                connection = @"SERVER=KLAUDIA\SQLEXPRESS;Database=Cinema;Trusted_Connection=true";
             }
             SqlConnection con = new SqlConnection(connection);
             con.Open();
