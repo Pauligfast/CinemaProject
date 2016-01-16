@@ -14,7 +14,7 @@ namespace Cinema
 
     public partial class Form1 : Form
     {
-        String connection = @"SERVER=PASHKO\SQLEXPRESS;Database=Cinema;Trusted_Connection=true";
+        String connection;
 
         public Form1()
         {
