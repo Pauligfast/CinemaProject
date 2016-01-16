@@ -14,7 +14,7 @@ namespace Cinema
 
     public partial class Form1 : Form
     {
-        String connection;
+        String connection = @"SERVER=PASHKO\SQLEXPRESS;Database=Cinema;Trusted_Connection=true";
 
         public Form1()
         {
@@ -65,16 +65,17 @@ namespace Cinema
             {
                 connection = @"SERVER=KLAUDIA\SQLEXPRESS;Database=Cinema;Trusted_Connection=true";
             }
-            SqlConnection con = new SqlConnection(connection);
-            con.Open();
-            String username = textBox1.Text;
-            String password = textBox2.Text;
-            SqlDataAdapter dataAdapted = new SqlDataAdapter("SELECT IS_ADMIN FROM LOG_IN WHERE USERNAME='" + username + "' AND PASSWORD='" + password + "'", con);
-            DataTable dt = new DataTable();
-            dataAdapted.Fill(dt);
-
             if (comboBox1.Text.ToString() != "")
             {
+                SqlConnection con = new SqlConnection(connection);
+                con.Open();
+                String username = textBox1.Text;
+                String password = textBox2.Text;
+                SqlDataAdapter dataAdapted = new SqlDataAdapter("SELECT IS_ADMIN FROM LOG_IN WHERE USERNAME='" + username + "' AND PASSWORD='" + password + "'", con);
+                DataTable dt = new DataTable();
+                dataAdapted.Fill(dt);
+
+
                 if (dt.Rows.Count == 1)
                 {
                     if (dt.Rows[0][0].ToString() == "True")
