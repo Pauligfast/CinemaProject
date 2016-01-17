@@ -55,7 +55,7 @@ namespace Cinema
       if (this.comboBox1.Text.ToString() == "Pavlo")
         this.connection = "SERVER=PASHKO\\SQLEXPRESS;Database=Cinema;Trusted_Connection=true";
       else if (this.comboBox1.Text.ToString() == "Doorota")
-        this.connection = "SERVER=PASHKO\\SQLEXPRESS;Database=Cinema;Trusted_Connection=true";
+        this.connection = "SERVER=ZWIERZYNIEC;Database=Cinema;Trusted_Connection=true";
       else if (this.comboBox1.Text.ToString() == "Klaudia")
         this.connection = "SERVER=KLAUDIA\\SQLEXPRESS;Database=Cinema;Trusted_Connection=true";
       if (this.comboBox1.Text.ToString() != "")
