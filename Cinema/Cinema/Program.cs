@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿// Decompiled with JetBrains decompiler
+// Type: Cinema.Program
+// Assembly: Cinema, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 93C9DD96-8ED5-40E1-AA89-2D6DD39249D6
+// Assembly location: C:\Users\Paulig\Source\Repos\CinemaProject\Cinema\Cinema\obj\Debug\Cinema.exe
+
+using System;
 using System.Windows.Forms;
 
 namespace Cinema
 {
-    static class Program
+  internal static class Program
+  {
+    [STAThread]
+    private static void Main()
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
-        }
+      Application.EnableVisualStyles();
+      Application.SetCompatibleTextRenderingDefault(false);
+      Application.Run((Form) new Form1());
     }
+  }
 }
