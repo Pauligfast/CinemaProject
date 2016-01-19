@@ -93,6 +93,8 @@ namespace Cinema
             SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM dbo.SESSIONS_IN_CINEMA ('" + loginCinema_ID + "')", selectConnection);
             DataTable dataSet = new DataTable();
             dataAdapter.Fill(dataSet);
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
             dataGridView1.DataSource = dataSet;
 
             dataAdapter = new SqlDataAdapter("SELECT MOVIE_TITLE FROM MOVIES", selectConnection);
@@ -1132,6 +1134,8 @@ namespace Cinema
             SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM dbo.MOVIES_ON_DAY ('" + monthCalendar2.SelectionRange.Start.ToString() + "')", selectConnection);
             DataTable dataSet = new DataTable();
             dataAdapter.Fill(dataSet);
+            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView2.DataSource = dataSet;
         }
 
