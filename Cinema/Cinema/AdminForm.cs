@@ -1139,14 +1139,15 @@ namespace Cinema
         {
             SqlConnection selectConnection = new SqlConnection(connection);
             selectConnection.Open();
-            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM MOVIES m JOIN DIRECTORS d ON m.ID_DIRECTOR=d.ID_DIRECTOR WHERE MOVIE_TITLE='" + comboBox2.SelectedIndex.ToString()+"'", selectConnection);
-            DataSet data = new DataSet();
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM DIRECTORS d  JOIN(MOVIES m JOIN GENRES g ON m.ID_GENRE=g.ID_GENRE)  ON m.ID_DIRECTOR=d.ID_DIRECTOR WHERE MOVIE_TITLE='" + comboBox2.SelectedItem.ToString() + "'", selectConnection);
+            DataTable data = new DataTable();
             dataAdapter.Fill(data);
-            
-            textBox13.Text = data.Tables["GENRE"].Rows.ToString();
-            textBox14.Text = data.Tables["FIRST_NAME"].Rows.ToString()+" "+ data.Tables["LAST_NAME"].Rows.ToString();
-            textBox12.Text = data.Tables["GENRE"].Rows.ToString();
-            textBox10.Text = data.Tables["DESCRIPTION"].Rows.ToString();
+            //DataRow r =data.Rows[0];
+
+            textBox13.Text = data.Rows[0]["GENRE_NAME"].ToString();
+            textBox14.Text = data.Rows[0]["FIRST_NAME"].ToString() + " " + data.Rows[0]["LAST_NAME"].ToString();
+            textBox12.Text = data.Rows[0]["RELEASE_YEAR"].ToString();
+            textBox10.Text = data.Rows[0]["DESCRIPTION"].ToString();
         }
     }
 }
