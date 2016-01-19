@@ -120,6 +120,7 @@ namespace Cinema
       this.textBox1.Name = "textBox1";
       componentResourceManager.ApplyResources((object) this.textBox2, "textBox2");
       this.textBox2.Name = "textBox2";
+            this.textBox2.UseSystemPasswordChar = true;
       componentResourceManager.ApplyResources((object) this.button1, "button1");
       this.button1.Name = "button1";
       this.button1.UseVisualStyleBackColor = true;
