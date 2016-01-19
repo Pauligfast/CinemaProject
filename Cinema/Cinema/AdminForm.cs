@@ -66,12 +66,10 @@ namespace Cinema
         private Label label12;
         private Label label13;
         private Label label14;
-        private Label label15;
         private TextBox textBox10;
         private TextBox textBox12;
         private TextBox textBox13;
         private TextBox textBox14;
-        private TextBox textBox15;
         private Form1 parent;
         private String connection;
         private DataGridView dataGridView2;
@@ -96,6 +94,15 @@ namespace Cinema
             DataTable dataSet = new DataTable();
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet;
+
+            dataAdapter = new SqlDataAdapter("SELECT MOVIE_TITLE FROM MOVIES", selectConnection);
+            DataSet data = new DataSet();
+            dataAdapter.Fill(data);
+            foreach (DataRow dataRow in data.Tables[0].Rows)
+            {
+                comboBox2.Items.Add(dataRow[0].ToString());
+            }
+
 
 
         }
@@ -234,12 +241,10 @@ namespace Cinema
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.textBox13 = new System.Windows.Forms.TextBox();
             this.textBox14 = new System.Windows.Forms.TextBox();
-            this.textBox15 = new System.Windows.Forms.TextBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.monthCalendar2 = new System.Windows.Forms.MonthCalendar();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -692,12 +697,10 @@ namespace Cinema
             this.tabPage5.Controls.Add(this.label12);
             this.tabPage5.Controls.Add(this.label13);
             this.tabPage5.Controls.Add(this.label14);
-            this.tabPage5.Controls.Add(this.label15);
             this.tabPage5.Controls.Add(this.textBox10);
             this.tabPage5.Controls.Add(this.textBox12);
             this.tabPage5.Controls.Add(this.textBox13);
             this.tabPage5.Controls.Add(this.textBox14);
-            this.tabPage5.Controls.Add(this.textBox15);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Size = new System.Drawing.Size(837, 319);
@@ -749,7 +752,7 @@ namespace Cinema
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(75, 154);
+            this.label11.Location = new System.Drawing.Point(86, 123);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(60, 13);
             this.label11.TabIndex = 25;
@@ -759,7 +762,7 @@ namespace Cinema
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(4, 124);
+            this.label12.Location = new System.Drawing.Point(8, 94);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(69, 13);
             this.label12.TabIndex = 24;
@@ -769,7 +772,7 @@ namespace Cinema
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(4, 98);
+            this.label13.Location = new System.Drawing.Point(13, 68);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(44, 13);
             this.label13.TabIndex = 23;
@@ -779,35 +782,25 @@ namespace Cinema
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(4, 72);
+            this.label14.Location = new System.Drawing.Point(13, 42);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(36, 13);
             this.label14.TabIndex = 22;
             this.label14.Text = "Genre";
             this.label14.Click += new System.EventHandler(this.label14_Click);
             // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(4, 45);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(27, 13);
-            this.label15.TabIndex = 21;
-            this.label15.Text = "Title";
-            this.label15.Click += new System.EventHandler(this.label15_Click);
-            // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(8, 179);
+            this.textBox10.Location = new System.Drawing.Point(19, 148);
             this.textBox10.Multiline = true;
             this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(210, 97);
+            this.textBox10.Size = new System.Drawing.Size(210, 156);
             this.textBox10.TabIndex = 20;
             this.textBox10.TextChanged += new System.EventHandler(this.textBox10_TextChanged);
             // 
             // textBox12
             // 
-            this.textBox12.Location = new System.Drawing.Point(88, 117);
+            this.textBox12.Location = new System.Drawing.Point(89, 91);
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(129, 20);
             this.textBox12.TabIndex = 19;
@@ -815,7 +808,7 @@ namespace Cinema
             // 
             // textBox13
             // 
-            this.textBox13.Location = new System.Drawing.Point(88, 65);
+            this.textBox13.Location = new System.Drawing.Point(89, 39);
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(129, 20);
             this.textBox13.TabIndex = 18;
@@ -823,19 +816,11 @@ namespace Cinema
             // 
             // textBox14
             // 
-            this.textBox14.Location = new System.Drawing.Point(88, 91);
+            this.textBox14.Location = new System.Drawing.Point(89, 65);
             this.textBox14.Name = "textBox14";
             this.textBox14.Size = new System.Drawing.Size(129, 20);
             this.textBox14.TabIndex = 17;
             this.textBox14.TextChanged += new System.EventHandler(this.textBox14_TextChanged);
-            // 
-            // textBox15
-            // 
-            this.textBox15.Location = new System.Drawing.Point(88, 39);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(129, 20);
-            this.textBox15.TabIndex = 16;
-            this.textBox15.TextChanged += new System.EventHandler(this.textBox15_TextChanged);
             // 
             // dataGridView2
             // 
@@ -1152,7 +1137,16 @@ namespace Cinema
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            SqlConnection selectConnection = new SqlConnection(connection);
+            selectConnection.Open();
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM MOVIES m JOIN DIRECTORS d ON m.ID_DIRECTOR=d.ID_DIRECTOR WHERE MOVIE_TITLE='" + comboBox2.SelectedIndex.ToString()+"'", selectConnection);
+            DataSet data = new DataSet();
+            dataAdapter.Fill(data);
+            
+            textBox13.Text = data.Tables["GENRE"].Rows.ToString();
+            textBox14.Text = data.Tables["FIRST_NAME"].Rows.ToString()+" "+ data.Tables["LAST_NAME"].Rows.ToString();
+            textBox12.Text = data.Tables["GENRE"].Rows.ToString();
+            textBox10.Text = data.Tables["DESCRIPTION"].Rows.ToString();
         }
     }
 }
