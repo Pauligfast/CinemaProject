@@ -72,9 +72,11 @@ namespace Cinema
         private TextBox textBox13;
         private TextBox textBox14;
         private TextBox textBox15;
-        private ListBox listBox3;
         private Form1 parent;
         private String connection;
+        private DataGridView dataGridView2;
+        private ComboBox comboBox2;
+        private MonthCalendar monthCalendar2;
         private String loginCinema_ID;
 
         public AdminForm(Form1 parent, String con, String logid)
@@ -90,14 +92,18 @@ namespace Cinema
         {
             SqlConnection selectConnection = new SqlConnection(connection);
             selectConnection.Open();
-            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM dbo.SESSIONS_IN_CINEMA ('"+ loginCinema_ID + "')", selectConnection);
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM dbo.SESSIONS_IN_CINEMA ('" + loginCinema_ID + "')", selectConnection);
             DataTable dataSet = new DataTable();
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet;
-          
+
 
         }
 
+        private void dataGridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
 
 
         private void button1_Click(object sender, EventArgs e)
@@ -158,6 +164,11 @@ namespace Cinema
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+        }
+
+        private void selectedColumnsButton_Click(object sender, System.EventArgs e)
+        {
+
         }
 
         private void label11_Click(object sender, EventArgs e)
@@ -229,13 +240,16 @@ namespace Cinema
             this.textBox13 = new System.Windows.Forms.TextBox();
             this.textBox14 = new System.Windows.Forms.TextBox();
             this.textBox15 = new System.Windows.Forms.TextBox();
-            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.monthCalendar2 = new System.Windows.Forms.MonthCalendar();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.Main.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // Main
@@ -258,7 +272,7 @@ namespace Cinema
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(445, 319);
+            this.tabPage1.Size = new System.Drawing.Size(837, 319);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -298,6 +312,7 @@ namespace Cinema
             this.button1.TabIndex = 29;
             this.button1.Text = "Delete";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_2);
             // 
             // button2
             // 
@@ -307,6 +322,7 @@ namespace Cinema
             this.button2.TabIndex = 28;
             this.button2.Text = "Add new employee";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // button3
             // 
@@ -316,6 +332,7 @@ namespace Cinema
             this.button3.TabIndex = 27;
             this.button3.Text = "Save changes";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // button7
             // 
@@ -325,6 +342,7 @@ namespace Cinema
             this.button7.TabIndex = 26;
             this.button7.Text = "Undo";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // label1
             // 
@@ -334,6 +352,7 @@ namespace Cinema
             this.label1.Size = new System.Drawing.Size(73, 13);
             this.label1.TabIndex = 25;
             this.label1.Text = "Hours a week";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -343,6 +362,7 @@ namespace Cinema
             this.label2.Size = new System.Drawing.Size(36, 13);
             this.label2.TabIndex = 24;
             this.label2.Text = "Salary";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -352,6 +372,7 @@ namespace Cinema
             this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 23;
             this.label3.Text = "Position";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label5
             // 
@@ -361,6 +382,7 @@ namespace Cinema
             this.label5.Size = new System.Drawing.Size(49, 13);
             this.label5.TabIndex = 22;
             this.label5.Text = "Surname";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
             // 
@@ -370,6 +392,7 @@ namespace Cinema
             this.label6.Size = new System.Drawing.Size(35, 13);
             this.label6.TabIndex = 21;
             this.label6.Text = "Name";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // textBox1
             // 
@@ -377,6 +400,7 @@ namespace Cinema
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(129, 20);
             this.textBox1.TabIndex = 20;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
             // 
             // textBox2
             // 
@@ -384,6 +408,7 @@ namespace Cinema
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(129, 20);
             this.textBox2.TabIndex = 19;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged_1);
             // 
             // textBox3
             // 
@@ -391,6 +416,7 @@ namespace Cinema
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(129, 20);
             this.textBox3.TabIndex = 18;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged_1);
             // 
             // textBox9
             // 
@@ -398,6 +424,7 @@ namespace Cinema
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(129, 20);
             this.textBox9.TabIndex = 17;
+            this.textBox9.TextChanged += new System.EventHandler(this.textBox9_TextChanged);
             // 
             // textBox11
             // 
@@ -405,6 +432,7 @@ namespace Cinema
             this.textBox11.Name = "textBox11";
             this.textBox11.Size = new System.Drawing.Size(129, 20);
             this.textBox11.TabIndex = 16;
+            this.textBox11.TextChanged += new System.EventHandler(this.textBox11_TextChanged);
             // 
             // listBox1
             // 
@@ -413,6 +441,7 @@ namespace Cinema
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(205, 316);
             this.listBox1.TabIndex = 15;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged_1);
             // 
             // tabPage3
             // 
@@ -433,10 +462,11 @@ namespace Cinema
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(699, 177);
+            this.comboBox1.Location = new System.Drawing.Point(695, 217);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 6;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // button6
             // 
@@ -446,6 +476,7 @@ namespace Cinema
             this.button6.TabIndex = 5;
             this.button6.Text = "Delete";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button5
             // 
@@ -455,18 +486,21 @@ namespace Cinema
             this.button5.TabIndex = 4;
             this.button5.Text = "Add";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(723, 215);
+            this.button4.Location = new System.Drawing.Point(723, 177);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 3;
             this.button4.Text = "Show";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
@@ -479,6 +513,7 @@ namespace Cinema
             this.monthCalendar1.Location = new System.Drawing.Point(680, 3);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 1;
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 
             // tabPage4
             // 
@@ -513,6 +548,7 @@ namespace Cinema
             this.button11.TabIndex = 14;
             this.button11.Text = "Delete";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button10
             // 
@@ -522,6 +558,7 @@ namespace Cinema
             this.button10.TabIndex = 13;
             this.button10.Text = "Add new client";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button9
             // 
@@ -531,6 +568,7 @@ namespace Cinema
             this.button9.TabIndex = 12;
             this.button9.Text = "Save changes";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button8
             // 
@@ -540,6 +578,7 @@ namespace Cinema
             this.button8.TabIndex = 11;
             this.button8.Text = "Undo";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // label10
             // 
@@ -549,6 +588,7 @@ namespace Cinema
             this.label10.Size = new System.Drawing.Size(52, 13);
             this.label10.TabIndex = 10;
             this.label10.Text = "Discount ";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // label9
             // 
@@ -558,6 +598,7 @@ namespace Cinema
             this.label9.Size = new System.Drawing.Size(76, 13);
             this.label9.TabIndex = 9;
             this.label9.Text = "Phone number";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label8
             // 
@@ -567,6 +608,7 @@ namespace Cinema
             this.label8.Size = new System.Drawing.Size(32, 13);
             this.label8.TabIndex = 8;
             this.label8.Text = "Email";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // label7
             // 
@@ -576,6 +618,7 @@ namespace Cinema
             this.label7.Size = new System.Drawing.Size(49, 13);
             this.label7.TabIndex = 7;
             this.label7.Text = "Surname";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label4
             // 
@@ -585,6 +628,7 @@ namespace Cinema
             this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 6;
             this.label4.Text = "Name";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // textBox8
             // 
@@ -592,6 +636,7 @@ namespace Cinema
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(129, 20);
             this.textBox8.TabIndex = 5;
+            this.textBox8.TextChanged += new System.EventHandler(this.textBox8_TextChanged);
             // 
             // textBox7
             // 
@@ -599,6 +644,7 @@ namespace Cinema
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(129, 20);
             this.textBox7.TabIndex = 4;
+            this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             // 
             // textBox6
             // 
@@ -606,6 +652,7 @@ namespace Cinema
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(129, 20);
             this.textBox6.TabIndex = 3;
+            this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             // 
             // textBox5
             // 
@@ -613,6 +660,7 @@ namespace Cinema
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(129, 20);
             this.textBox5.TabIndex = 2;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // textBox4
             // 
@@ -620,6 +668,7 @@ namespace Cinema
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(129, 20);
             this.textBox4.TabIndex = 1;
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // listBox2
             // 
@@ -628,9 +677,13 @@ namespace Cinema
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(205, 316);
             this.listBox2.TabIndex = 0;
+            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.comboBox2);
+            this.tabPage5.Controls.Add(this.monthCalendar2);
+            this.tabPage5.Controls.Add(this.dataGridView2);
             this.tabPage5.Controls.Add(this.button12);
             this.tabPage5.Controls.Add(this.button13);
             this.tabPage5.Controls.Add(this.button14);
@@ -645,7 +698,6 @@ namespace Cinema
             this.tabPage5.Controls.Add(this.textBox13);
             this.tabPage5.Controls.Add(this.textBox14);
             this.tabPage5.Controls.Add(this.textBox15);
-            this.tabPage5.Controls.Add(this.listBox3);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Size = new System.Drawing.Size(837, 319);
@@ -656,34 +708,37 @@ namespace Cinema
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(227, 291);
+            this.button12.Location = new System.Drawing.Point(278, 237);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(121, 23);
             this.button12.TabIndex = 29;
             this.button12.Text = "Delete";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(227, 262);
+            this.button13.Location = new System.Drawing.Point(278, 208);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(121, 23);
             this.button13.TabIndex = 28;
             this.button13.Text = "Add new client";
             this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(227, 233);
+            this.button14.Location = new System.Drawing.Point(239, 179);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(96, 23);
             this.button14.TabIndex = 27;
             this.button14.Text = "Save changes";
             this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(344, 233);
+            this.button15.Location = new System.Drawing.Point(342, 179);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(98, 23);
             this.button15.TabIndex = 26;
@@ -694,7 +749,7 @@ namespace Cinema
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(305, 114);
+            this.label11.Location = new System.Drawing.Point(75, 154);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(60, 13);
             this.label11.TabIndex = 25;
@@ -704,82 +759,109 @@ namespace Cinema
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(224, 88);
+            this.label12.Location = new System.Drawing.Point(4, 124);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(69, 13);
             this.label12.TabIndex = 24;
             this.label12.Text = "Release year";
+            this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(224, 62);
+            this.label13.Location = new System.Drawing.Point(4, 98);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(44, 13);
             this.label13.TabIndex = 23;
             this.label13.Text = "Director";
+            this.label13.Click += new System.EventHandler(this.label13_Click);
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(224, 36);
+            this.label14.Location = new System.Drawing.Point(4, 72);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(36, 13);
             this.label14.TabIndex = 22;
             this.label14.Text = "Genre";
+            this.label14.Click += new System.EventHandler(this.label14_Click);
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(224, 9);
+            this.label15.Location = new System.Drawing.Point(4, 45);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(27, 13);
             this.label15.TabIndex = 21;
             this.label15.Text = "Title";
+            this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(227, 130);
+            this.textBox10.Location = new System.Drawing.Point(8, 179);
             this.textBox10.Multiline = true;
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(210, 97);
             this.textBox10.TabIndex = 20;
+            this.textBox10.TextChanged += new System.EventHandler(this.textBox10_TextChanged);
             // 
             // textBox12
             // 
-            this.textBox12.Location = new System.Drawing.Point(308, 81);
+            this.textBox12.Location = new System.Drawing.Point(88, 117);
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(129, 20);
             this.textBox12.TabIndex = 19;
+            this.textBox12.TextChanged += new System.EventHandler(this.textBox12_TextChanged);
             // 
             // textBox13
             // 
-            this.textBox13.Location = new System.Drawing.Point(308, 29);
+            this.textBox13.Location = new System.Drawing.Point(88, 65);
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(129, 20);
             this.textBox13.TabIndex = 18;
+            this.textBox13.TextChanged += new System.EventHandler(this.textBox13_TextChanged);
             // 
             // textBox14
             // 
-            this.textBox14.Location = new System.Drawing.Point(308, 55);
+            this.textBox14.Location = new System.Drawing.Point(88, 91);
             this.textBox14.Name = "textBox14";
             this.textBox14.Size = new System.Drawing.Size(129, 20);
             this.textBox14.TabIndex = 17;
+            this.textBox14.TextChanged += new System.EventHandler(this.textBox14_TextChanged);
             // 
             // textBox15
             // 
-            this.textBox15.Location = new System.Drawing.Point(308, 3);
+            this.textBox15.Location = new System.Drawing.Point(88, 39);
             this.textBox15.Name = "textBox15";
             this.textBox15.Size = new System.Drawing.Size(129, 20);
             this.textBox15.TabIndex = 16;
+            this.textBox15.TextChanged += new System.EventHandler(this.textBox15_TextChanged);
             // 
-            // listBox3
+            // dataGridView2
             // 
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.Location = new System.Drawing.Point(3, 3);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(205, 316);
-            this.listBox3.TabIndex = 15;
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(446, 0);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(388, 315);
+            this.dataGridView2.TabIndex = 30;
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
+            // 
+            // monthCalendar2
+            // 
+            this.monthCalendar2.Location = new System.Drawing.Point(269, 4);
+            this.monthCalendar2.Name = "monthCalendar2";
+            this.monthCalendar2.TabIndex = 31;
+            this.monthCalendar2.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar2_DateChanged);
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(3, 12);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(214, 21);
+            this.comboBox2.TabIndex = 32;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // AdminForm
             // 
@@ -800,11 +882,275 @@ namespace Cinema
             this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SqlConnection selectConnection = new SqlConnection(connection);
+            selectConnection.Open();
+            monthCalendar1.MaxSelectionCount = 1;
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM dbo.MOVIES_ON_DAY ('" + monthCalendar1.SelectionRange.Start.ToString() + "')", selectConnection);
+            DataTable dataSet = new DataTable();
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet;
+
+        }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox9_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox11_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox8_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox7_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox10_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox12_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox13_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox14_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox15_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void monthCalendar2_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            SqlConnection selectConnection = new SqlConnection(connection);
+            selectConnection.Open();
+            monthCalendar2.MaxSelectionCount = 1;
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM dbo.MOVIES_ON_DAY ('" + monthCalendar2.SelectionRange.Start.ToString() + "')", selectConnection);
+            DataTable dataSet = new DataTable();
+            dataAdapter.Fill(dataSet);
+            dataGridView2.DataSource = dataSet;
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
