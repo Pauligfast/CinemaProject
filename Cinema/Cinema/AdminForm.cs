@@ -6,154 +6,173 @@
 
 using System;
 using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace Cinema
 {
-  public class AdminForm : Form
-  {
-    private IContainer components = (IContainer) null;
-    private TabControl Main;
-    private TabPage tabPage1;
-    private TabPage tabPage2;
-    private TabPage tabPage3;
-    private TabPage tabPage4;
-    private TabPage tabPage5;
-    private DataGridView dataGridView1;
-    private MonthCalendar monthCalendar1;
-    private ComboBox comboBox1;
-    private Button button6;
-    private Button button5;
-    private Button button4;
-    private TextBox textBox8;
-    private TextBox textBox7;
-    private TextBox textBox6;
-    private TextBox textBox5;
-    private TextBox textBox4;
-    private ListBox listBox2;
-    private Button button1;
-    private Button button2;
-    private Button button3;
-    private Button button7;
-    private Label label1;
-    private Label label2;
-    private Label label3;
-    private Label label5;
-    private Label label6;
-    private TextBox textBox1;
-    private TextBox textBox2;
-    private TextBox textBox3;
-    private TextBox textBox9;
-    private TextBox textBox11;
-    private ListBox listBox1;
-    private Button button11;
-    private Button button10;
-    private Button button9;
-    private Button button8;
-    private Label label10;
-    private Label label9;
-    private Label label8;
-    private Label label7;
-    private Label label4;
-    private Button button12;
-    private Button button13;
-    private Button button14;
-    private Button button15;
-    private Label label11;
-    private Label label12;
-    private Label label13;
-    private Label label14;
-    private Label label15;
-    private TextBox textBox10;
-    private TextBox textBox12;
-    private TextBox textBox13;
-    private TextBox textBox14;
-    private TextBox textBox15;
-    private ListBox listBox3;
-
-    public AdminForm()
+    public class AdminForm : Form
     {
-      this.InitializeComponent();
-    }
+        private IContainer components = (IContainer)null;
+        private TabControl Main;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        private TabPage tabPage3;
+        private TabPage tabPage4;
+        private TabPage tabPage5;
+        private DataGridView dataGridView1;
+        private MonthCalendar monthCalendar1;
+        private ComboBox comboBox1;
+        private Button button6;
+        private Button button5;
+        private Button button4;
+        private TextBox textBox8;
+        private TextBox textBox7;
+        private TextBox textBox6;
+        private TextBox textBox5;
+        private TextBox textBox4;
+        private ListBox listBox2;
+        private Button button1;
+        private Button button2;
+        private Button button3;
+        private Button button7;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label5;
+        private Label label6;
+        private TextBox textBox1;
+        private TextBox textBox2;
+        private TextBox textBox3;
+        private TextBox textBox9;
+        private TextBox textBox11;
+        private ListBox listBox1;
+        private Button button11;
+        private Button button10;
+        private Button button9;
+        private Button button8;
+        private Label label10;
+        private Label label9;
+        private Label label8;
+        private Label label7;
+        private Label label4;
+        private Button button12;
+        private Button button13;
+        private Button button14;
+        private Button button15;
+        private Label label11;
+        private Label label12;
+        private Label label13;
+        private Label label14;
+        private Label label15;
+        private TextBox textBox10;
+        private TextBox textBox12;
+        private TextBox textBox13;
+        private TextBox textBox14;
+        private TextBox textBox15;
+        private ListBox listBox3;
+        private Form1 parent;
+        private String connection;
+        private String loginCinema_ID;
 
-    private void AdminForm_Load(object sender, EventArgs e)
-    {
-    }
+        public AdminForm(Form1 parent, String con, String logid)
 
-    private void button1_Click(object sender, EventArgs e)
-    {
-    }
+        {
+            loginCinema_ID = logid;
+            this.connection = con;
+            this.parent = parent;
+            this.InitializeComponent();
+        }
 
-    private void Main_SelectedIndexChanged(object sender, EventArgs e)
-    {
-    }
+        private void AdminForm_Load(object sender, EventArgs e)
+        {
+            SqlConnection selectConnection = new SqlConnection(connection);
+            selectConnection.Open();
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM dbo.SESSIONS_IN_CINEMA ('"+ loginCinema_ID + "')", selectConnection);
+            DataTable dataSet = new DataTable();
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet;
+          
 
-    private void tabPage2_Click(object sender, EventArgs e)
-    {
-    }
+        }
 
-    private void tabPage1_Click(object sender, EventArgs e)
-    {
-    }
 
-    private void tabPage3_Click(object sender, EventArgs e)
-    {
-    }
 
-    private void tabPage4_Click(object sender, EventArgs e)
-    {
-    }
+        private void button1_Click(object sender, EventArgs e)
+        {
+        }
 
-    private void tabPage5_Click(object sender, EventArgs e)
-    {
-    }
+        private void Main_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
 
-    private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-    {
-    }
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+        }
 
-    private void textBox1_TextChanged(object sender, EventArgs e)
-    {
-    }
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+        }
 
-    private void textBox2_TextChanged(object sender, EventArgs e)
-    {
-    }
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
+        }
 
-    private void textBox3_TextChanged(object sender, EventArgs e)
-    {
-    }
+        private void tabPage4_Click(object sender, EventArgs e)
+        {
+        }
 
-    private void button1_Click_1(object sender, EventArgs e)
-    {
-    }
+        private void tabPage5_Click(object sender, EventArgs e)
+        {
+        }
 
-    private void button2_Click(object sender, EventArgs e)
-    {
-    }
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
 
-    private void button3_Click(object sender, EventArgs e)
-    {
-    }
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+        }
 
-    private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-    {
-    }
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+        }
 
-    private void label11_Click(object sender, EventArgs e)
-    {
-    }
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+        }
 
-    protected override void Dispose(bool disposing)
-    {
-      if (disposing && this.components != null)
-        this.components.Dispose();
-      base.Dispose(disposing);
-    }
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+        }
 
-    private void InitializeComponent()
-    {
+        private void button2_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && this.components != null)
+                this.components.Dispose();
+            base.Dispose(disposing);
+        }
+
+        private void InitializeComponent()
+        {
             this.Main = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -230,7 +249,7 @@ namespace Cinema
             this.Main.Location = new System.Drawing.Point(0, 0);
             this.Main.Name = "Main";
             this.Main.SelectedIndex = 0;
-            this.Main.Size = new System.Drawing.Size(453, 345);
+            this.Main.Size = new System.Drawing.Size(845, 345);
             this.Main.TabIndex = 0;
             this.Main.SelectedIndexChanged += new System.EventHandler(this.Main_SelectedIndexChanged);
             // 
@@ -265,7 +284,7 @@ namespace Cinema
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(445, 319);
+            this.tabPage2.Size = new System.Drawing.Size(837, 319);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Employees";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -405,7 +424,7 @@ namespace Cinema
             this.tabPage3.Controls.Add(this.monthCalendar1);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(445, 319);
+            this.tabPage3.Size = new System.Drawing.Size(837, 319);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Sessions";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -414,14 +433,14 @@ namespace Cinema
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(303, 177);
+            this.comboBox1.Location = new System.Drawing.Point(699, 177);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 6;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(324, 286);
+            this.button6.Location = new System.Drawing.Point(723, 273);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 5;
@@ -430,7 +449,7 @@ namespace Cinema
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(324, 257);
+            this.button5.Location = new System.Drawing.Point(723, 244);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 4;
@@ -439,7 +458,7 @@ namespace Cinema
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(324, 228);
+            this.button4.Location = new System.Drawing.Point(723, 215);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 3;
@@ -451,13 +470,13 @@ namespace Cinema
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(277, 313);
+            this.dataGridView1.Size = new System.Drawing.Size(665, 313);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(281, 3);
+            this.monthCalendar1.Location = new System.Drawing.Point(680, 3);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 1;
             // 
@@ -480,7 +499,7 @@ namespace Cinema
             this.tabPage4.Controls.Add(this.listBox2);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(445, 319);
+            this.tabPage4.Size = new System.Drawing.Size(837, 319);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Clients";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -629,7 +648,7 @@ namespace Cinema
             this.tabPage5.Controls.Add(this.listBox3);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(445, 319);
+            this.tabPage5.Size = new System.Drawing.Size(837, 319);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Movies";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -766,7 +785,7 @@ namespace Cinema
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(453, 345);
+            this.ClientSize = new System.Drawing.Size(845, 345);
             this.Controls.Add(this.Main);
             this.Name = "AdminForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -783,7 +802,7 @@ namespace Cinema
             this.tabPage5.PerformLayout();
             this.ResumeLayout(false);
 
-    }
+        }
 
         private void button15_Click(object sender, EventArgs e)
         {
