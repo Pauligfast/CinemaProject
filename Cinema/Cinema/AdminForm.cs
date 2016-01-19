@@ -1149,5 +1149,11 @@ namespace Cinema
             textBox12.Text = data.Rows[0]["RELEASE_YEAR"].ToString();
             textBox10.Text = data.Rows[0]["DESCRIPTION"].ToString();
         }
+
+        public void AdminForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Determine if text has changed in the textbox by comparing to original text.
+            parent.Show();
+        }
     }
 }
