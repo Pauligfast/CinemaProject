@@ -75,6 +75,7 @@ namespace Cinema
         private DataGridView dataGridView2;
         private ComboBox comboBox2;
         private MonthCalendar monthCalendar2;
+        private DataGridView dataGridView3;
         private String loginCinema_ID;
 
         public AdminForm(Form1 parent, String con, String logid)
@@ -105,6 +106,13 @@ namespace Cinema
                 comboBox2.Items.Add(dataRow[0].ToString());
             }
 
+            dataAdapter = new SqlDataAdapter("SELECT * FROM CLIENTS", connection);
+            DataTable dataTable = new DataTable();
+            dataAdapter.Fill(dataTable);
+            foreach (DataRow r in dataTable.Rows)
+            {
+                listBox2.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
+            }
 
 
         }
@@ -250,6 +258,7 @@ namespace Cinema
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.monthCalendar2 = new System.Windows.Forms.MonthCalendar();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.Main.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -257,6 +266,7 @@ namespace Cinema
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.SuspendLayout();
             // 
             // Main
@@ -524,6 +534,7 @@ namespace Cinema
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.dataGridView3);
             this.tabPage4.Controls.Add(this.button11);
             this.tabPage4.Controls.Add(this.button10);
             this.tabPage4.Controls.Add(this.button9);
@@ -850,6 +861,15 @@ namespace Cinema
             this.comboBox2.TabIndex = 32;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
+            // dataGridView3
+            // 
+            this.dataGridView3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Location = new System.Drawing.Point(458, 3);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.Size = new System.Drawing.Size(379, 320);
+            this.dataGridView3.TabIndex = 15;
+            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -870,6 +890,7 @@ namespace Cinema
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1058,6 +1079,16 @@ namespace Cinema
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            String last = listBox2.SelectedItem.ToString().Split(' ')[0];
+            String first = listBox2.SelectedItem.ToString().Split(' ')[1];
+            SqlConnection selectConnection = new SqlConnection(connection);
+            selectConnection.Open();
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT ID_ORDER, QUANTITY, SUM FROM ORDERS o JOIN CLIENTS c ON o.ID_CLIENT=o.ID_CLIENT WHERE c.FIRST_NAME='"+first+"' AND c.LAST_NAME='"+last+"'", selectConnection);
+            DataTable dataSet = new DataTable();
+            dataAdapter.Fill(dataSet);
+
+            dataGridView3.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView3.DataSource = dataSet;
 
         }
 
@@ -1158,6 +1189,9 @@ namespace Cinema
         {
             // Determine if text has changed in the textbox by comparing to original text.
             parent.Show();
+            parent.textBox1.Clear();
+            parent.textBox2.Clear();
+           // parent.comboBox1.Refresh();
         }
     }
 }

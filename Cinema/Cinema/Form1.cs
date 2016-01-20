@@ -16,13 +16,13 @@ namespace Cinema
     {
         public string connection = "SERVER=PASHKO\\SQLEXPRESS;Database=Cinema;Trusted_Connection=true";
         private IContainer components = (IContainer)null;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        public TextBox textBox1;
+        public TextBox textBox2;
         private Label label1;
         private Label label2;
         private Button button2;
         private Button button1;
-        private ComboBox comboBox1;
+        public ComboBox comboBox1;
         private Label label3;
         public String loggedinCinemaID;
         public String connectionGlobal;
@@ -111,6 +111,9 @@ namespace Cinema
         {
             // Determine if text has changed in the textbox by comparing to original text.
             this.Show();
+            textBox1.Refresh();
+            textBox2.Refresh();
+            comboBox1.Refresh();
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
