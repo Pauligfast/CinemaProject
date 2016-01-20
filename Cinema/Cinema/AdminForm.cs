@@ -633,9 +633,9 @@ namespace Cinema
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(224, 36);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(49, 13);
+            this.label7.Size = new System.Drawing.Size(68, 13);
             this.label7.TabIndex = 7;
-            this.label7.Text = "Surname";
+            this.label7.Text = "LAST NAME";
             this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label4
@@ -643,9 +643,9 @@ namespace Cinema
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(224, 9);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.Size = new System.Drawing.Size(72, 13);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Name";
+            this.label4.Text = "FIRST NAME";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // textBox8
@@ -1024,7 +1024,19 @@ namespace Cinema
 
         private void button8_Click(object sender, EventArgs e)
         {
+            SqlConnection selectConnection = new SqlConnection(connection);
+            selectConnection.Open();
+            String last = listBox2.SelectedItem.ToString().Split(' ')[0];
+            String first = listBox2.SelectedItem.ToString().Split(' ')[1];
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM CLIENTS WHERE FIRST_NAME='" + first + "' AND LAST_NAME='" + last + "'", selectConnection);
+            DataTable dataSet = new DataTable();
+            dataAdapter.Fill(dataSet);
 
+            textBox4.Text = dataSet.Rows[0]["FIRST_NAME"].ToString();
+            textBox6.Text = dataSet.Rows[0]["LAST_NAME"].ToString();
+            textBox5.Text = dataSet.Rows[0]["EMAIL_ADRESS"].ToString();
+            textBox7.Text = dataSet.Rows[0]["PHONE_NUMBER"].ToString();
+            textBox8.Text = dataSet.Rows[0]["DISCOUNT"].ToString();
         }
 
         private void label10_Click(object sender, EventArgs e)
@@ -1083,12 +1095,21 @@ namespace Cinema
             String first = listBox2.SelectedItem.ToString().Split(' ')[1];
             SqlConnection selectConnection = new SqlConnection(connection);
             selectConnection.Open();
-            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT ID_ORDER, QUANTITY, SUM FROM ORDERS o JOIN CLIENTS c ON o.ID_CLIENT=o.ID_CLIENT WHERE c.FIRST_NAME='"+first+"' AND c.LAST_NAME='"+last+"'", selectConnection);
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT ID_ORDER, QUANTITY, SUM FROM ORDERS o JOIN CLIENTS c ON o.ID_CLIENT=o.ID_CLIENT WHERE c.FIRST_NAME='" + first + "' AND c.LAST_NAME='" + last + "'", selectConnection);
             DataTable dataSet = new DataTable();
             dataAdapter.Fill(dataSet);
-
             dataGridView3.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView3.DataSource = dataSet;
+
+            dataAdapter = new SqlDataAdapter("SELECT * FROM CLIENTS WHERE FIRST_NAME='" + first + "' AND LAST_NAME='" + last + "'", selectConnection);
+            dataSet = new DataTable();
+            dataAdapter.Fill(dataSet);
+
+            textBox4.Text = dataSet.Rows[0]["FIRST_NAME"].ToString();
+            textBox6.Text = dataSet.Rows[0]["LAST_NAME"].ToString();
+            textBox5.Text = dataSet.Rows[0]["EMAIL_ADRESS"].ToString();
+            textBox7.Text = dataSet.Rows[0]["PHONE_NUMBER"].ToString();
+            textBox8.Text = dataSet.Rows[0]["DISCOUNT"].ToString();
 
         }
 
@@ -1191,7 +1212,7 @@ namespace Cinema
             parent.Show();
             parent.textBox1.Clear();
             parent.textBox2.Clear();
-           // parent.comboBox1.Refresh();
+            // parent.comboBox1.Refresh();
         }
     }
 }
