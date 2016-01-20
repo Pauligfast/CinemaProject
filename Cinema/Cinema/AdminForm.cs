@@ -1095,7 +1095,7 @@ namespace Cinema
             String first = listBox2.SelectedItem.ToString().Split(' ')[1];
             SqlConnection selectConnection = new SqlConnection(connection);
             selectConnection.Open();
-            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT ID_ORDER, QUANTITY, SUM FROM ORDERS o JOIN CLIENTS c ON o.ID_CLIENT=o.ID_CLIENT WHERE c.FIRST_NAME='" + first + "' AND c.LAST_NAME='" + last + "'", selectConnection);
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT ID_ORDER, QUANTITY, SUM FROM ORDERS o JOIN CLIENTS c ON o.ID_CLIENT=c.ID_CLIENT WHERE c.FIRST_NAME='" + first + "' AND c.LAST_NAME='" + last + "'", selectConnection);
             DataTable dataSet = new DataTable();
             dataAdapter.Fill(dataSet);
             dataGridView3.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
