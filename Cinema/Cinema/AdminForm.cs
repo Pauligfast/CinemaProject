@@ -38,15 +38,12 @@ namespace Cinema
         private Button button2;
         private Button button3;
         private Button button7;
-        private Label label1;
         private Label label2;
         private Label label3;
         private Label label5;
         private Label label6;
-        private TextBox textBox1;
         private TextBox textBox2;
         private TextBox textBox3;
-        private TextBox textBox9;
         private TextBox textBox11;
         private ListBox listBox1;
         private Button button11;
@@ -76,6 +73,8 @@ namespace Cinema
         private ComboBox comboBox2;
         private MonthCalendar monthCalendar2;
         private DataGridView dataGridView3;
+        private DataGridView dataGridView4;
+        private ComboBox comboBox3;
         private String loginCinema_ID;
 
         public AdminForm(Form1 parent, String con, String logid)
@@ -114,6 +113,21 @@ namespace Cinema
                 listBox2.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
             }
 
+            dataAdapter = new SqlDataAdapter("SELECT * FROM EMPLOYEES", connection);
+            dataTable = new DataTable();
+            dataAdapter.Fill(dataTable);
+            foreach (DataRow r in dataTable.Rows)
+            {
+                listBox1.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
+            }
+
+            dataAdapter = new SqlDataAdapter("SELECT * FROM POSITIONS", connection);
+            dataTable = new DataTable();
+            dataAdapter.Fill(dataTable);
+            foreach (DataRow r in dataTable.Rows)
+            {
+                comboBox3.Items.Add(r["POSITION_NAME"].ToString());
+            }
 
         }
 
@@ -208,15 +222,12 @@ namespace Cinema
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -259,6 +270,8 @@ namespace Cinema
             this.monthCalendar2 = new System.Windows.Forms.MonthCalendar();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.Main.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -267,6 +280,7 @@ namespace Cinema
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.SuspendLayout();
             // 
             // Main
@@ -297,19 +311,18 @@ namespace Cinema
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.comboBox3);
+            this.tabPage2.Controls.Add(this.dataGridView4);
             this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.button2);
             this.tabPage2.Controls.Add(this.button3);
             this.tabPage2.Controls.Add(this.button7);
-            this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.textBox1);
             this.tabPage2.Controls.Add(this.textBox2);
             this.tabPage2.Controls.Add(this.textBox3);
-            this.tabPage2.Controls.Add(this.textBox9);
             this.tabPage2.Controls.Add(this.textBox11);
             this.tabPage2.Controls.Add(this.listBox1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -361,16 +374,6 @@ namespace Cinema
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(226, 112);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 13);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "Hours a week";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -411,14 +414,6 @@ namespace Cinema
             this.label6.Text = "Name";
             this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(310, 105);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(129, 20);
-            this.textBox1.TabIndex = 20;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
-            // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(310, 79);
@@ -434,14 +429,6 @@ namespace Cinema
             this.textBox3.Size = new System.Drawing.Size(129, 20);
             this.textBox3.TabIndex = 18;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged_1);
-            // 
-            // textBox9
-            // 
-            this.textBox9.Location = new System.Drawing.Point(310, 53);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(129, 20);
-            this.textBox9.TabIndex = 17;
-            this.textBox9.TextChanged += new System.EventHandler(this.textBox9_TextChanged);
             // 
             // textBox11
             // 
@@ -870,6 +857,23 @@ namespace Cinema
             this.dataGridView3.Size = new System.Drawing.Size(379, 320);
             this.dataGridView3.TabIndex = 15;
             // 
+            // dataGridView4
+            // 
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Location = new System.Drawing.Point(452, 1);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.Size = new System.Drawing.Size(384, 321);
+            this.dataGridView4.TabIndex = 30;
+            this.dataGridView4.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellContentClick);
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(310, 52);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(129, 21);
+            this.comboBox3.TabIndex = 31;
+            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -891,6 +895,7 @@ namespace Cinema
             this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -929,12 +934,39 @@ namespace Cinema
 
         private void button3_Click_1(object sender, EventArgs e)
         {
+            String last = listBox1.SelectedItem.ToString().Split(' ')[0];
+            String first = listBox1.SelectedItem.ToString().Split(' ')[1];
+            SqlConnection selectConnection = new SqlConnection(connection);
+            selectConnection.Open();
+
+            decimal d = decimal.Parse(textBox2.Text.ToString(), System.Globalization.CultureInfo.InvariantCulture);
+            // decimal.Format(Convert.ToDecimal(textBox2.Text.ToString()));
+            SqlCommand command = new SqlCommand("UPDATE EMPLOYEES SET FIRST_NAME='"+textBox11.Text.ToString()+"', LAST_NAME='"+textBox3.Text.ToString()+"', SALARY='"+d+"' WHERE FIRST_NAME='"+first+"' AND LAST_NAME='"+last+"'",selectConnection);
+            command.ExecuteNonQuery();
 
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            String last = listBox1.SelectedItem.ToString().Split(' ')[0];
+            String first = listBox1.SelectedItem.ToString().Split(' ')[1];
+            SqlConnection selectConnection = new SqlConnection(connection);
+            selectConnection.Open();
+            // SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM RAPORT_BY_EMPLOYEE WHERE FIRST_NAME='" + first + "' AND LAST_NAME='" + last + "'", selectConnection);
+            DataTable dataSet = new DataTable();
+            //  dataAdapter.Fill(dataSet);
+            dataGridView4.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView4.DataSource = dataSet;
 
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM EMPLOYEES e JOIN POSITIONS p ON p.ID_POSITION=e.ID_POSITION WHERE FIRST_NAME='" + first + "' AND LAST_NAME='" + last + "'", selectConnection);
+            dataSet = new DataTable();
+            dataAdapter.Fill(dataSet);
+
+            textBox11.Text = dataSet.Rows[0]["FIRST_NAME"].ToString();
+            textBox3.Text = dataSet.Rows[0]["LAST_NAME"].ToString();
+          //  textBox9.Text = dataSet.Rows[0]["POSITION_NAME"].ToString();
+            textBox2.Text = dataSet.Rows[0]["SALARY"].ToString();
+          
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -989,7 +1021,26 @@ namespace Cinema
 
         private void listBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
+            String last = listBox1.SelectedItem.ToString().Split(' ')[0];
+            String first = listBox1.SelectedItem.ToString().Split(' ')[1];
+            SqlConnection selectConnection = new SqlConnection(connection);
+            selectConnection.Open();
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM RAPORT_BY_EMPLOYEE WHERE FIRST_NAME='" + first + "' AND LAST_NAME='" + last + "'", selectConnection);
+            DataTable dataSet = new DataTable();
+            dataAdapter.Fill(dataSet);
+            dataGridView4.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView4.DataSource = dataSet;
 
+            dataAdapter = new SqlDataAdapter("SELECT * FROM EMPLOYEES e JOIN POSITIONS p ON p.ID_POSITION=e.ID_POSITION WHERE FIRST_NAME='" + first + "' AND LAST_NAME='" + last + "'", selectConnection);
+            dataSet = new DataTable();
+            dataAdapter.Fill(dataSet);
+
+            textBox11.Text = dataSet.Rows[0]["FIRST_NAME"].ToString();
+            textBox3.Text = dataSet.Rows[0]["LAST_NAME"].ToString();
+           // textBox9.Text = dataSet.Rows[0]["POSITION_NAME"].ToString();
+            textBox2.Text = dataSet.Rows[0]["SALARY"].ToString();
+           
+            comboBox3.SelectedItem = dataSet.Rows[0]["POSITION_NAME"].ToString();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -1213,6 +1264,11 @@ namespace Cinema
             parent.textBox1.Clear();
             parent.textBox2.Clear();
             // parent.comboBox1.Refresh();
+        }
+
+        private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
