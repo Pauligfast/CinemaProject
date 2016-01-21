@@ -17,7 +17,6 @@ namespace Cinema
     {
         private IContainer components = (IContainer)null;
         private TabControl Main;
-        private TabPage tabPage1;
         private TabPage tabPage2;
         private TabPage tabPage3;
         private TabPage tabPage4;
@@ -217,7 +216,6 @@ namespace Cinema
         private void InitializeComponent()
         {
             this.Main = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -287,7 +285,6 @@ namespace Cinema
             // 
             // Main
             // 
-            this.Main.Controls.Add(this.tabPage1);
             this.Main.Controls.Add(this.tabPage2);
             this.Main.Controls.Add(this.tabPage3);
             this.Main.Controls.Add(this.tabPage4);
@@ -299,17 +296,6 @@ namespace Cinema
             this.Main.Size = new System.Drawing.Size(845, 345);
             this.Main.TabIndex = 0;
             this.Main.SelectedIndexChanged += new System.EventHandler(this.Main_SelectedIndexChanged);
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(837, 319);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Main";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // tabPage2
             // 
