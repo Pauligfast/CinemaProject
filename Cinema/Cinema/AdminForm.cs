@@ -75,6 +75,7 @@ namespace Cinema
         private DataGridView dataGridView3;
         private DataGridView dataGridView4;
         private ComboBox comboBox3;
+        private Button button16;
         private String loginCinema_ID;
 
         public AdminForm(Form1 parent, String con, String logid)
@@ -272,6 +273,7 @@ namespace Cinema
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.button16 = new System.Windows.Forms.Button();
             this.Main.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -311,6 +313,7 @@ namespace Cinema
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button16);
             this.tabPage2.Controls.Add(this.comboBox3);
             this.tabPage2.Controls.Add(this.dataGridView4);
             this.tabPage2.Controls.Add(this.button1);
@@ -336,7 +339,7 @@ namespace Cinema
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(229, 257);
+            this.button1.Location = new System.Drawing.Point(229, 176);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(121, 23);
             this.button1.TabIndex = 29;
@@ -346,7 +349,7 @@ namespace Cinema
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(229, 228);
+            this.button2.Location = new System.Drawing.Point(229, 147);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(121, 23);
             this.button2.TabIndex = 28;
@@ -356,7 +359,7 @@ namespace Cinema
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(229, 145);
+            this.button3.Location = new System.Drawing.Point(229, 105);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(96, 23);
             this.button3.TabIndex = 27;
@@ -366,7 +369,7 @@ namespace Cinema
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(341, 145);
+            this.button7.Location = new System.Drawing.Point(341, 105);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(98, 23);
             this.button7.TabIndex = 26;
@@ -874,6 +877,15 @@ namespace Cinema
             this.comboBox3.Size = new System.Drawing.Size(129, 21);
             this.comboBox3.TabIndex = 31;
             // 
+            // button16
+            // 
+            this.button16.Location = new System.Drawing.Point(229, 206);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(121, 23);
+            this.button16.TabIndex = 32;
+            this.button16.Text = "New positon";
+            this.button16.UseVisualStyleBackColor = true;
+            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -934,23 +946,33 @@ namespace Cinema
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            String last = listBox1.SelectedItem.ToString().Split(' ')[0];
-            String first = listBox1.SelectedItem.ToString().Split(' ')[1];
+            String last = textBox3.Text.ToString();
+            String first = textBox11.Text.ToString();
             SqlConnection selectConnection = new SqlConnection(connection);
             selectConnection.Open();
 
-            decimal d = decimal.Parse(textBox2.Text.ToString(), System.Globalization.CultureInfo.InvariantCulture)/10000;
+            decimal d = decimal.Parse(textBox2.Text.ToString(), System.Globalization.CultureInfo.InvariantCulture) / 10000;
             // decimal.Format(Convert.ToDecimal(textBox2.Text.ToString()));
-            SqlCommand command = new SqlCommand("UPDATE EMPLOYEES SET FIRST_NAME='"+textBox11.Text.ToString()+"', LAST_NAME='"+textBox3.Text.ToString()+"', SALARY="+d+" WHERE FIRST_NAME='"+first+"' AND LAST_NAME='"+last+"'",selectConnection);
+            SqlCommand command = new SqlCommand("UPDATE EMPLOYEES SET FIRST_NAME='" + textBox11.Text.ToString() + "', LAST_NAME='" + textBox3.Text.ToString() + "', SALARY=" + d + " WHERE FIRST_NAME='" + first + "' AND LAST_NAME='" + last + "'", selectConnection);
             command.ExecuteNonQuery();
+            command = new SqlCommand("UPDATE EMPLOYEES SET SALARY = (SELECT MIN_SALARY FROM POSITIONS WHERE POSITION_NAME = '" + comboBox3.SelectedItem.ToString() + "'), ID_POSITION = (SELECT ID_POSITION FROM POSITIONS WHERE POSITION_NAME = '" + comboBox3.SelectedItem.ToString() + "') WHERE FIRST_NAME = '" + textBox11.Text.ToString() + "' AND LAST_NAME = '" + textBox3.Text.ToString() + "'", selectConnection);
+            command.ExecuteNonQuery();
+
             SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM EMPLOYEES", connection);
-             DataTable dataTable = new DataTable();
+            DataTable dataTable = new DataTable();
             dataAdapter.Fill(dataTable);
+            last = textBox3.Text.ToString();
+            first = textBox11.Text.ToString();
             listBox1.Items.Clear();
             foreach (DataRow r in dataTable.Rows)
             {
                 listBox1.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
             }
+
+            dataAdapter = new SqlDataAdapter("SELECT SALARY FROM EMPLOYEES WHERE FIRST_NAME='" + textBox11.Text.ToString() + "' AND LAST_NAME='" + textBox3.Text.ToString() + "'", connection);
+            dataTable = new DataTable();
+            dataAdapter.Fill(dataTable);
+            textBox2.Text = dataTable.Rows[0]["SALARY"].ToString();
 
         }
 
@@ -972,9 +994,9 @@ namespace Cinema
 
             textBox11.Text = dataSet.Rows[0]["FIRST_NAME"].ToString();
             textBox3.Text = dataSet.Rows[0]["LAST_NAME"].ToString();
-          //  textBox9.Text = dataSet.Rows[0]["POSITION_NAME"].ToString();
+            //  textBox9.Text = dataSet.Rows[0]["POSITION_NAME"].ToString();
             textBox2.Text = dataSet.Rows[0]["SALARY"].ToString();
-          
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -1045,9 +1067,9 @@ namespace Cinema
 
             textBox11.Text = dataSet.Rows[0]["FIRST_NAME"].ToString();
             textBox3.Text = dataSet.Rows[0]["LAST_NAME"].ToString();
-           // textBox9.Text = dataSet.Rows[0]["POSITION_NAME"].ToString();
+            // textBox9.Text = dataSet.Rows[0]["POSITION_NAME"].ToString();
             textBox2.Text = dataSet.Rows[0]["SALARY"].ToString();
-           
+
             comboBox3.SelectedItem = dataSet.Rows[0]["POSITION_NAME"].ToString();
         }
 
