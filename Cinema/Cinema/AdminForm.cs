@@ -943,6 +943,13 @@ namespace Cinema
             // decimal.Format(Convert.ToDecimal(textBox2.Text.ToString()));
             SqlCommand command = new SqlCommand("UPDATE EMPLOYEES SET FIRST_NAME='"+textBox11.Text.ToString()+"', LAST_NAME='"+textBox3.Text.ToString()+"', SALARY='"+d+"' WHERE FIRST_NAME='"+first+"' AND LAST_NAME='"+last+"'",selectConnection);
             command.ExecuteNonQuery();
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM EMPLOYEES", connection);
+            DataTable dataTable = new DataTable();
+            dataAdapter.Fill(dataTable);
+            foreach (DataRow r in dataTable.Rows)
+            {
+                listBox1.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
+            }
 
         }
 
