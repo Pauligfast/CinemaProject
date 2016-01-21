@@ -939,13 +939,14 @@ namespace Cinema
             SqlConnection selectConnection = new SqlConnection(connection);
             selectConnection.Open();
 
-            decimal d = decimal.Parse(textBox2.Text.ToString(), System.Globalization.CultureInfo.InvariantCulture);
+            decimal d = decimal.Parse(textBox2.Text.ToString(), System.Globalization.CultureInfo.InvariantCulture)/10000;
             // decimal.Format(Convert.ToDecimal(textBox2.Text.ToString()));
-            SqlCommand command = new SqlCommand("UPDATE EMPLOYEES SET FIRST_NAME='"+textBox11.Text.ToString()+"', LAST_NAME='"+textBox3.Text.ToString()+"', SALARY='"+d+"' WHERE FIRST_NAME='"+first+"' AND LAST_NAME='"+last+"'",selectConnection);
+            SqlCommand command = new SqlCommand("UPDATE EMPLOYEES SET FIRST_NAME='"+textBox11.Text.ToString()+"', LAST_NAME='"+textBox3.Text.ToString()+"', SALARY="+d+" WHERE FIRST_NAME='"+first+"' AND LAST_NAME='"+last+"'",selectConnection);
             command.ExecuteNonQuery();
             SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM EMPLOYEES", connection);
-            DataTable dataTable = new DataTable();
+             DataTable dataTable = new DataTable();
             dataAdapter.Fill(dataTable);
+            listBox1.Items.Clear();
             foreach (DataRow r in dataTable.Rows)
             {
                 listBox1.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
