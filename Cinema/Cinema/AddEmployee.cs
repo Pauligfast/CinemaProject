@@ -26,6 +26,14 @@ namespace Cinema
 
         }
 
+        void HandleSqlException(SqlException e)
+        {
+
+            int num1 = (int)MessageBox.Show("Phone number has to contain 9 numbers", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+
+        }
+
+
         private void AddEmployee_Load(object sender, EventArgs e)
         {
             SqlConnection selectConnection = new SqlConnection(connection);
@@ -54,25 +62,32 @@ namespace Cinema
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text.ToString() != "" && textBox2.Text.ToString() != "" && textBox3.Text.ToString() != "" &&
-                textBox4.Text.ToString() != "" && comboBox1.SelectedIndex != -1 && comboBox2.SelectedIndex != -1)
+            try
             {
-                SqlConnection selectConnection = new SqlConnection(connection);
-                selectConnection.Open();
-                String first = textBox1.Text.ToString();
-                String last = textBox2.Text.ToString();
-                String position = comboBox1.SelectedItem.ToString();
-                String phone = textBox3.Text.ToString();
-                String mail = textBox4.Text.ToString();
-                String idcinema = comboBox2.SelectedItem.ToString();
-                SqlCommand insert = new SqlCommand("INSERT INTO EMPLOYEES VALUES('" + first + "','" + last + "',(SELECT ID_POSITION FROM POSITIONS WHERE POSITION_NAME='" + position + "'),'" + phone + "','" + mail + "', " + idcinema + ", (SELECT MIN_SALARY FROM POSITIONS WHERE POSITION_NAME='" + position + "'))", selectConnection);
-                insert.ExecuteNonQuery();
-                insert = new SqlCommand("INSERT INTO LOG_IN VALUES('" + first + "','" + last + "', 0,(SELECT ID_EMPLOYEE FROM EMPLOYEES WHERE FIRST_NAME='" + first + "' AND LAST_NAME='" + last + "'))", selectConnection);
-                insert.ExecuteNonQuery();
-                this.Close();
+                if (textBox1.Text.ToString() != "" && textBox2.Text.ToString() != "" && textBox3.Text.ToString() != "" &&
+                    textBox4.Text.ToString() != "" && comboBox1.SelectedIndex != -1 && comboBox2.SelectedIndex != -1)
+                {
+                    SqlConnection selectConnection = new SqlConnection(connection);
+                    selectConnection.Open();
+                    String first = textBox1.Text.ToString();
+                    String last = textBox2.Text.ToString();
+                    String position = comboBox1.SelectedItem.ToString();
+                    String phone = textBox3.Text.ToString();
+                    String mail = textBox4.Text.ToString();
+                    String idcinema = comboBox2.SelectedItem.ToString();
+                    SqlCommand insert = new SqlCommand("INSERT INTO EMPLOYEES VALUES('" + first + "','" + last + "',(SELECT ID_POSITION FROM POSITIONS WHERE POSITION_NAME='" + position + "'),'" + phone + "','" + mail + "', " + idcinema + ", (SELECT MIN_SALARY FROM POSITIONS WHERE POSITION_NAME='" + position + "'))", selectConnection);
+                    insert.ExecuteNonQuery();
+                    insert = new SqlCommand("INSERT INTO LOG_IN VALUES('" + first + "','" + last + "', 0,(SELECT ID_EMPLOYEE FROM EMPLOYEES WHERE FIRST_NAME='" + first + "' AND LAST_NAME='" + last + "'))", selectConnection);
+                    insert.ExecuteNonQuery();
+                    this.Close();
+                }
+                else {
+                    int num1 = (int)MessageBox.Show("Empty fields are not allowed", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                }
             }
-            else {
-                int num1 = (int)MessageBox.Show("Empty fields are not allowed", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            catch (SqlException exc)
+            {
+                HandleSqlException(exc);
             }
         }
     }
