@@ -326,6 +326,7 @@ namespace Cinema
             this.button16.TabIndex = 32;
             this.button16.Text = "New positon";
             this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // comboBox3
             // 
@@ -334,6 +335,7 @@ namespace Cinema
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(129, 21);
             this.comboBox3.TabIndex = 31;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
             // dataGridView4
             // 
@@ -901,7 +903,8 @@ namespace Cinema
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-
+            AddEmployee add = new AddEmployee(loginCinema_ID, connection);
+            add.Show();
         }
 
         private void button3_Click_1(object sender, EventArgs e)
@@ -938,24 +941,27 @@ namespace Cinema
 
         private void button7_Click(object sender, EventArgs e)
         {
-            String last = listBox1.SelectedItem.ToString().Split(' ')[0];
-            String first = listBox1.SelectedItem.ToString().Split(' ')[1];
-            SqlConnection selectConnection = new SqlConnection(connection);
-            selectConnection.Open();
-            // SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM RAPORT_BY_EMPLOYEE WHERE FIRST_NAME='" + first + "' AND LAST_NAME='" + last + "'", selectConnection);
-            DataTable dataSet = new DataTable();
-            //  dataAdapter.Fill(dataSet);
-            dataGridView4.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView4.DataSource = dataSet;
+            if (listBox1.SelectedIndex != -1)
+            {
+                String last = listBox1.SelectedItem.ToString().Split(' ')[0];
+                String first = listBox1.SelectedItem.ToString().Split(' ')[1];
+                SqlConnection selectConnection = new SqlConnection(connection);
+                selectConnection.Open();
+                // SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM RAPORT_BY_EMPLOYEE WHERE FIRST_NAME='" + first + "' AND LAST_NAME='" + last + "'", selectConnection);
+                DataTable dataSet = new DataTable();
+                //  dataAdapter.Fill(dataSet);
+                dataGridView4.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dataGridView4.DataSource = dataSet;
 
-            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM EMPLOYEES e JOIN POSITIONS p ON p.ID_POSITION=e.ID_POSITION WHERE FIRST_NAME='" + first + "' AND LAST_NAME='" + last + "'", selectConnection);
-            dataSet = new DataTable();
-            dataAdapter.Fill(dataSet);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM EMPLOYEES e JOIN POSITIONS p ON p.ID_POSITION=e.ID_POSITION WHERE FIRST_NAME='" + first + "' AND LAST_NAME='" + last + "'", selectConnection);
+                dataSet = new DataTable();
+                dataAdapter.Fill(dataSet);
 
-            textBox11.Text = dataSet.Rows[0]["FIRST_NAME"].ToString();
-            textBox3.Text = dataSet.Rows[0]["LAST_NAME"].ToString();
-            //  textBox9.Text = dataSet.Rows[0]["POSITION_NAME"].ToString();
-            textBox2.Text = dataSet.Rows[0]["SALARY"].ToString();
+                textBox11.Text = dataSet.Rows[0]["FIRST_NAME"].ToString();
+                textBox3.Text = dataSet.Rows[0]["LAST_NAME"].ToString();
+                //  textBox9.Text = dataSet.Rows[0]["POSITION_NAME"].ToString();
+                textBox2.Text = dataSet.Rows[0]["SALARY"].ToString();
+            }
 
         }
 
@@ -1227,7 +1233,7 @@ namespace Cinema
             SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM dbo.MOVIES_ON_DAY ('" + monthCalendar2.SelectionRange.Start.ToString() + "')", selectConnection);
             DataTable dataSet = new DataTable();
             dataAdapter.Fill(dataSet);
-           // dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            // dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView2.DataSource = dataSet;
         }
@@ -1259,6 +1265,17 @@ namespace Cinema
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            AddPosition add = new AddPosition(connection);
+            add.Show();
         }
     }
 }
