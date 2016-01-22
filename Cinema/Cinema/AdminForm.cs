@@ -33,7 +33,6 @@ namespace Cinema
         private TextBox textBox5;
         private TextBox textBox4;
         private ListBox listBox2;
-        private Button button1;
         private Button button2;
         private Button button3;
         private Button button7;
@@ -54,7 +53,6 @@ namespace Cinema
         private Label label8;
         private Label label7;
         private Label label4;
-        private Button button12;
         private Button button13;
         private Button button14;
         private Button button15;
@@ -217,7 +215,9 @@ namespace Cinema
         {
             this.Main = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -237,6 +237,7 @@ namespace Cinema
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
@@ -253,7 +254,9 @@ namespace Cinema
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.button12 = new System.Windows.Forms.Button();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.monthCalendar2 = new System.Windows.Forms.MonthCalendar();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
@@ -265,22 +268,15 @@ namespace Cinema
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.textBox13 = new System.Windows.Forms.TextBox();
             this.textBox14 = new System.Windows.Forms.TextBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.monthCalendar2 = new System.Windows.Forms.MonthCalendar();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.button16 = new System.Windows.Forms.Button();
             this.Main.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.SuspendLayout();
             // 
             // Main
@@ -302,7 +298,6 @@ namespace Cinema
             this.tabPage2.Controls.Add(this.button16);
             this.tabPage2.Controls.Add(this.comboBox3);
             this.tabPage2.Controls.Add(this.dataGridView4);
-            this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.button2);
             this.tabPage2.Controls.Add(this.button3);
             this.tabPage2.Controls.Add(this.button7);
@@ -323,23 +318,39 @@ namespace Cinema
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
-            // button1
+            // button16
             // 
-            this.button1.Location = new System.Drawing.Point(229, 176);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(121, 23);
-            this.button1.TabIndex = 29;
-            this.button1.Text = "Delete";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_2);
+            this.button16.Location = new System.Drawing.Point(343, 147);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(96, 23);
+            this.button16.TabIndex = 32;
+            this.button16.Text = "New positon";
+            this.button16.UseVisualStyleBackColor = true;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(310, 52);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(129, 21);
+            this.comboBox3.TabIndex = 31;
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Location = new System.Drawing.Point(452, 1);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.Size = new System.Drawing.Size(384, 321);
+            this.dataGridView4.TabIndex = 30;
+            this.dataGridView4.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellContentClick);
             // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(229, 147);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(121, 23);
+            this.button2.Size = new System.Drawing.Size(96, 23);
             this.button2.TabIndex = 28;
-            this.button2.Text = "Add new employee";
+            this.button2.Text = "New employee";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
@@ -534,6 +545,15 @@ namespace Cinema
             this.tabPage4.UseVisualStyleBackColor = true;
             this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
             // 
+            // dataGridView3
+            // 
+            this.dataGridView3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Location = new System.Drawing.Point(458, 3);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.Size = new System.Drawing.Size(379, 320);
+            this.dataGridView3.TabIndex = 15;
+            // 
             // button11
             // 
             this.button11.Location = new System.Drawing.Point(227, 259);
@@ -678,7 +698,6 @@ namespace Cinema
             this.tabPage5.Controls.Add(this.comboBox2);
             this.tabPage5.Controls.Add(this.monthCalendar2);
             this.tabPage5.Controls.Add(this.dataGridView2);
-            this.tabPage5.Controls.Add(this.button12);
             this.tabPage5.Controls.Add(this.button13);
             this.tabPage5.Controls.Add(this.button14);
             this.tabPage5.Controls.Add(this.button15);
@@ -698,19 +717,35 @@ namespace Cinema
             this.tabPage5.UseVisualStyleBackColor = true;
             this.tabPage5.Click += new System.EventHandler(this.tabPage5_Click);
             // 
-            // button12
+            // comboBox2
             // 
-            this.button12.Location = new System.Drawing.Point(278, 237);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(121, 23);
-            this.button12.TabIndex = 29;
-            this.button12.Text = "Delete";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(3, 12);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(214, 21);
+            this.comboBox2.TabIndex = 32;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            // 
+            // monthCalendar2
+            // 
+            this.monthCalendar2.Location = new System.Drawing.Point(269, 4);
+            this.monthCalendar2.Name = "monthCalendar2";
+            this.monthCalendar2.TabIndex = 31;
+            this.monthCalendar2.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar2_DateChanged);
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(446, 0);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(388, 315);
+            this.dataGridView2.TabIndex = 30;
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(278, 208);
+            this.button13.Location = new System.Drawing.Point(284, 251);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(121, 23);
             this.button13.TabIndex = 28;
@@ -720,9 +755,9 @@ namespace Cinema
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(239, 179);
+            this.button14.Location = new System.Drawing.Point(284, 193);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(96, 23);
+            this.button14.Size = new System.Drawing.Size(121, 23);
             this.button14.TabIndex = 27;
             this.button14.Text = "Save changes";
             this.button14.UseVisualStyleBackColor = true;
@@ -730,9 +765,9 @@ namespace Cinema
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(342, 179);
+            this.button15.Location = new System.Drawing.Point(284, 222);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(98, 23);
+            this.button15.Size = new System.Drawing.Size(121, 23);
             this.button15.TabIndex = 26;
             this.button15.Text = "Undo";
             this.button15.UseVisualStyleBackColor = true;
@@ -783,7 +818,7 @@ namespace Cinema
             this.textBox10.Location = new System.Drawing.Point(19, 148);
             this.textBox10.Multiline = true;
             this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(210, 156);
+            this.textBox10.Size = new System.Drawing.Size(238, 156);
             this.textBox10.TabIndex = 20;
             this.textBox10.TextChanged += new System.EventHandler(this.textBox10_TextChanged);
             // 
@@ -811,67 +846,6 @@ namespace Cinema
             this.textBox14.TabIndex = 17;
             this.textBox14.TextChanged += new System.EventHandler(this.textBox14_TextChanged);
             // 
-            // dataGridView2
-            // 
-            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(446, 0);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(388, 315);
-            this.dataGridView2.TabIndex = 30;
-            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
-            // 
-            // monthCalendar2
-            // 
-            this.monthCalendar2.Location = new System.Drawing.Point(269, 4);
-            this.monthCalendar2.Name = "monthCalendar2";
-            this.monthCalendar2.TabIndex = 31;
-            this.monthCalendar2.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar2_DateChanged);
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(3, 12);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(214, 21);
-            this.comboBox2.TabIndex = 32;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(458, 3);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(379, 320);
-            this.dataGridView3.TabIndex = 15;
-            // 
-            // dataGridView4
-            // 
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Location = new System.Drawing.Point(452, 1);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(384, 321);
-            this.dataGridView4.TabIndex = 30;
-            this.dataGridView4.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellContentClick);
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(310, 52);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(129, 21);
-            this.comboBox3.TabIndex = 31;
-            // 
-            // button16
-            // 
-            this.button16.Location = new System.Drawing.Point(229, 206);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(121, 23);
-            this.button16.TabIndex = 32;
-            this.button16.Text = "New positon";
-            this.button16.UseVisualStyleBackColor = true;
-            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -885,15 +859,15 @@ namespace Cinema
             this.Main.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1253,7 +1227,7 @@ namespace Cinema
             SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM dbo.MOVIES_ON_DAY ('" + monthCalendar2.SelectionRange.Start.ToString() + "')", selectConnection);
             DataTable dataSet = new DataTable();
             dataAdapter.Fill(dataSet);
-            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+           // dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView2.DataSource = dataSet;
         }
