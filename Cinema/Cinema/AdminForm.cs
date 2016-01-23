@@ -967,33 +967,40 @@ namespace Cinema
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            String last = textBox3.Text.ToString();
-            String first = textBox11.Text.ToString();
-            SqlConnection selectConnection = new SqlConnection(connection);
-            selectConnection.Open();
-
-            decimal d = decimal.Parse(textBox2.Text.ToString(), System.Globalization.CultureInfo.InvariantCulture) / 10000;
-            // decimal.Format(Convert.ToDecimal(textBox2.Text.ToString()));
-            SqlCommand command = new SqlCommand("UPDATE EMPLOYEES SET FIRST_NAME='" + textBox11.Text.ToString() + "', LAST_NAME='" + textBox3.Text.ToString() + "', SALARY=" + d + " WHERE FIRST_NAME='" + first + "' AND LAST_NAME='" + last + "'", selectConnection);
-            command.ExecuteNonQuery();
-            command = new SqlCommand("UPDATE EMPLOYEES SET SALARY = (SELECT MIN_SALARY FROM POSITIONS WHERE POSITION_NAME = '" + comboBox3.SelectedItem.ToString() + "'), ID_POSITION = (SELECT ID_POSITION FROM POSITIONS WHERE POSITION_NAME = '" + comboBox3.SelectedItem.ToString() + "') WHERE FIRST_NAME = '" + textBox11.Text.ToString() + "' AND LAST_NAME = '" + textBox3.Text.ToString() + "'", selectConnection);
-            command.ExecuteNonQuery();
-
-            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM EMPLOYEES", connection);
-            DataTable dataTable = new DataTable();
-            dataAdapter.Fill(dataTable);
-            last = textBox3.Text.ToString();
-            first = textBox11.Text.ToString();
-            listBox1.Items.Clear();
-            foreach (DataRow r in dataTable.Rows)
+            try
             {
-                listBox1.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
-            }
+                String last = listBox1.SelectedItem.ToString().Split(' ')[0];
+                String first = listBox1.SelectedItem.ToString().Split(' ')[1];
+                SqlConnection selectConnection = new SqlConnection(connection);
+                selectConnection.Open();
+                MessageBox.Show(last+ first);
 
-            dataAdapter = new SqlDataAdapter("SELECT SALARY FROM EMPLOYEES WHERE FIRST_NAME='" + textBox11.Text.ToString() + "' AND LAST_NAME='" + textBox3.Text.ToString() + "'", connection);
-            dataTable = new DataTable();
-            dataAdapter.Fill(dataTable);
-            textBox2.Text = dataTable.Rows[0]["SALARY"].ToString();
+                int d = int.Parse(textBox2.Text.ToString(), System.Globalization.CultureInfo.InvariantCulture);
+                // decimal.Format(Convert.ToDecimal(textBox2.Text.ToString()));
+                SqlCommand command = new SqlCommand("UPDATE EMPLOYEES SET FIRST_NAME='" + textBox11.Text.ToString() + "', LAST_NAME='" + textBox3.Text.ToString() + "', SALARY=" + d + " WHERE FIRST_NAME='" + first + "' AND LAST_NAME='" + last + "'", selectConnection);
+                command.ExecuteNonQuery();
+                command = new SqlCommand("UPDATE EMPLOYEES SET SALARY = (SELECT MIN_SALARY FROM POSITIONS WHERE POSITION_NAME = '" + comboBox3.SelectedItem.ToString() + "'), ID_POSITION = (SELECT ID_POSITION FROM POSITIONS WHERE POSITION_NAME = '" + comboBox3.SelectedItem.ToString() + "') WHERE FIRST_NAME = '" + textBox11.Text.ToString() + "' AND LAST_NAME = '" + textBox3.Text.ToString() + "'", selectConnection);
+                command.ExecuteNonQuery();
+
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM EMPLOYEES", connection);
+                DataTable dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
+                last = textBox3.Text.ToString();
+                first = textBox11.Text.ToString();
+                listBox1.Items.Clear();
+                foreach (DataRow r in dataTable.Rows)
+                {
+                    listBox1.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
+                }
+
+                dataAdapter = new SqlDataAdapter("SELECT SALARY FROM EMPLOYEES WHERE FIRST_NAME='" + textBox11.Text.ToString() + "' AND LAST_NAME='" + textBox3.Text.ToString() + "'", connection);
+                dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
+                //textBox2.Text = dataTable.Rows[0]["SALARY"].ToString();
+            }
+            catch (SqlException exc) {
+                HandleSqlException(exc);
+            }
 
         }
 
@@ -1158,6 +1165,38 @@ namespace Cinema
 
         private void button9_Click(object sender, EventArgs e)
         {
+            try
+            {
+                String last = listBox2.SelectedItem.ToString().Split(' ')[0];
+                String first = listBox2.SelectedItem.ToString().Split(' ')[1];
+                SqlConnection selectConnection = new SqlConnection(connection);
+                selectConnection.Open();
+
+
+                SqlCommand command = new SqlCommand("UPDATE CLIENTS SET FIRST_NAME='" + textBox4.Text.ToString() + "', LAST_NAME='" + textBox6.Text.ToString() + "', PHONE_NUMBER='" + textBox7.Text.ToString() + "', EMAIL_ADRESS='" + textBox5.Text.ToString() + "', DISCOUNT=" + textBox8.Text.ToString() + " WHERE FIRST_NAME='" + first + "' AND LAST_NAME='" + last + "'", selectConnection);
+                command.ExecuteNonQuery();
+
+
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM CLIENTS", connection);
+                DataTable dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
+                last = textBox6.Text.ToString();
+                first = textBox4.Text.ToString();
+                listBox2.Items.Clear();
+                foreach (DataRow r in dataTable.Rows)
+                {
+                    listBox2.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
+                }
+
+            }
+            catch (SqlException exc) {
+                HandleSqlException(exc);
+            }
+        }
+        void HandleSqlException(SqlException e)
+        {
+
+            int num1 = (int)MessageBox.Show("Phone number has to contain 9 numbers", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Hand);
 
         }
 
