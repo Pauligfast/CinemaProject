@@ -42,6 +42,7 @@ namespace Cinema
         private NumericUpDown numericUpDown2;
         private Label label2;
         private DataTable dataSet;
+        private Button button7;
         private SqlDataAdapter dataAdapter;
 
     public UserForm(Form1 parent, String con, String logid)
@@ -78,6 +79,7 @@ namespace Cinema
             this.button3 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.listBox2 = new System.Windows.Forms.ListBox();
+            this.button7 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -100,6 +102,7 @@ namespace Cinema
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button7);
             this.tabPage1.Controls.Add(this.numericUpDown1);
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.listBox1);
@@ -116,7 +119,7 @@ namespace Cinema
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(554, 293);
+            this.numericUpDown1.Location = new System.Drawing.Point(791, 272);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(66, 22);
             this.numericUpDown1.TabIndex = 11;
@@ -128,7 +131,7 @@ namespace Cinema
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(305, 283);
+            this.button2.Location = new System.Drawing.Point(470, 300);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(130, 41);
             this.button2.TabIndex = 10;
@@ -148,7 +151,7 @@ namespace Cinema
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(497, 262);
+            this.label1.Location = new System.Drawing.Point(611, 272);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(125, 17);
             this.label1.TabIndex = 6;
@@ -156,7 +159,7 @@ namespace Cinema
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(699, 283);
+            this.button1.Location = new System.Drawing.Point(736, 300);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(130, 41);
             this.button1.TabIndex = 4;
@@ -278,6 +281,16 @@ namespace Cinema
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(192, 308);
             this.listBox2.TabIndex = 0;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(275, 300);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(130, 41);
+            this.button7.TabIndex = 12;
+            this.button7.Text = "Add new client";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // UserForm
             // 
@@ -556,6 +569,11 @@ namespace Cinema
                     }
                 }
             }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
