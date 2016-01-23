@@ -42,6 +42,8 @@ namespace Cinema
         private NumericUpDown numericUpDown2;
         private Label label2;
         private DataTable dataSet;
+        private Button button7;
+        private SqlDataAdapter dataAdapter;
 
     public UserForm(Form1 parent, String con, String logid)
     {
@@ -69,21 +71,22 @@ namespace Cinema
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.listBox2 = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.button7 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -99,6 +102,7 @@ namespace Cinema
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button7);
             this.tabPage1.Controls.Add(this.numericUpDown1);
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.listBox1);
@@ -115,7 +119,7 @@ namespace Cinema
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(554, 293);
+            this.numericUpDown1.Location = new System.Drawing.Point(791, 272);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(66, 22);
             this.numericUpDown1.TabIndex = 11;
@@ -127,7 +131,7 @@ namespace Cinema
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(305, 283);
+            this.button2.Location = new System.Drawing.Point(470, 300);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(130, 41);
             this.button2.TabIndex = 10;
@@ -147,7 +151,7 @@ namespace Cinema
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(497, 262);
+            this.label1.Location = new System.Drawing.Point(611, 272);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(125, 17);
             this.label1.TabIndex = 6;
@@ -155,7 +159,7 @@ namespace Cinema
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(699, 283);
+            this.button1.Location = new System.Drawing.Point(736, 300);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(130, 41);
             this.button1.TabIndex = 4;
@@ -195,6 +199,27 @@ namespace Cinema
             this.tabPage2.Text = "Ticket refunds";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(800, 223);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(56, 22);
+            this.numericUpDown2.TabIndex = 7;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(705, 194);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(176, 17);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "How many tickets remove?";
+            // 
             // button6
             // 
             this.button6.Location = new System.Drawing.Point(725, 251);
@@ -203,6 +228,7 @@ namespace Cinema
             this.button6.TabIndex = 5;
             this.button6.Text = "Delete ticket";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button5
             // 
@@ -256,21 +282,15 @@ namespace Cinema
             this.listBox2.Size = new System.Drawing.Size(192, 308);
             this.listBox2.TabIndex = 0;
             // 
-            // label2
+            // button7
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(705, 194);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(176, 17);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "How many tickets remove?";
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(800, 223);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(56, 22);
-            this.numericUpDown2.TabIndex = 7;
+            this.button7.Location = new System.Drawing.Point(275, 300);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(130, 41);
+            this.button7.TabIndex = 12;
+            this.button7.Text = "Add new client";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // UserForm
             // 
@@ -289,11 +309,25 @@ namespace Cinema
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
 
     }
+
+        internal void refresh_listbox()
+        {
+            SqlDataAdapter dataAdapter2 = new SqlDataAdapter("SELECT * FROM CLIENTS", selectConnection);
+            DataTable dataSet2 = new DataTable();
+            dataAdapter2.Fill(dataSet2);
+            listBox1.Items.Clear();
+            listBox2.Items.Clear();
+            foreach (DataRow r in dataSet2.Rows)
+            {
+                listBox1.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
+                listBox2.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
+            }
+        }
 
         private void UserForm_Load(object sender, EventArgs e)
         {
@@ -303,7 +337,7 @@ namespace Cinema
             DataTable t = new DataTable();
             sql.Fill(t);
             CinemaId = t.Rows[0][0].ToString();
-            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM dbo.SESSIONS_IN_CINEMA ("+CinemaId+")", selectConnection);
+            dataAdapter = new SqlDataAdapter("SELECT * FROM dbo.SESSIONS_IN_CINEMA ("+CinemaId+")", selectConnection);
             dataSet = new DataTable();
             dataAdapter.Fill(dataSet);
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -367,6 +401,16 @@ namespace Cinema
                             if (i == 1)
                             {
                                 insert.ExecuteNonQuery();
+                                SqlDataAdapter sql = new SqlDataAdapter("SELECT ID_CINEMA FROM EMPLOYEES WHERE ID_EMPLOYEE =" + loginEmployee_ID, selectConnection);
+                                DataTable t = new DataTable();
+                                sql.Fill(t);
+                                CinemaId = t.Rows[0][0].ToString();
+                                dataAdapter = new SqlDataAdapter("SELECT * FROM dbo.SESSIONS_IN_CINEMA (" + CinemaId + ")", selectConnection);
+                                dataSet = new DataTable();
+                                dataAdapter.Fill(dataSet);
+                                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                                dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+                                dataGridView1.DataSource = dataSet;
                             }
                             else
                             {
@@ -379,6 +423,16 @@ namespace Cinema
                                     {
                                         insert.ExecuteNonQuery();
                                     }
+                                    SqlDataAdapter sql = new SqlDataAdapter("SELECT ID_CINEMA FROM EMPLOYEES WHERE ID_EMPLOYEE =" + loginEmployee_ID, selectConnection);
+                                    DataTable t = new DataTable();
+                                    sql.Fill(t);
+                                    CinemaId = t.Rows[0][0].ToString();
+                                    dataAdapter = new SqlDataAdapter("SELECT * FROM dbo.SESSIONS_IN_CINEMA (" + CinemaId + ")", selectConnection);
+                                    dataSet = new DataTable();
+                                    dataAdapter.Fill(dataSet);
+                                    dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                                    dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+                                    dataGridView1.DataSource = dataSet;
                                 }
                                 else
                                 {
@@ -420,7 +474,7 @@ namespace Cinema
                 ClientId = dataSet3.Rows[0][0].ToString();
                 SqlCommand insert = new SqlCommand("INSERT INTO ORDERS VALUES(" + loginEmployee_ID + "," + ClientId + ",0,0)", selectConnection);
                 insert.ExecuteNonQuery();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT ID_ORDER FROM ORDERS WHERE ID_EMPLOYEE='" + loginEmployee_ID + "' AND ID_CLIENT='" + ClientId + "'", selectConnection);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT ID_ORDER FROM ORDERS WHERE ID_EMPLOYEE='" + loginEmployee_ID + "' AND ID_CLIENT='" + ClientId + "' ORDER BY ID_ORDER DESC", selectConnection);
                 DataTable data = new DataTable();
                 dataAdapter.Fill(data);
                 OrderId = data.Rows[0][0].ToString();
@@ -485,13 +539,56 @@ namespace Cinema
                 SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT ID_CLIENT FROM CLIENTS WHERE FIRST_NAME='" + listBox2.SelectedItem.ToString().Split(' ')[1] + "' AND LAST_NAME='" + listBox2.SelectedItem.ToString().Split(' ')[0] + "'", selectConnection);
                 DataTable dataSet = new DataTable();
                 dataAdapter.Fill(dataSet);
-                SqlDataAdapter dataAd = new SqlDataAdapter("SELECT DISTINCT S.SESSION_DATE AS [DATE], S.SESSION_TIME AS [TIME], M.MOVIE_TITLE AS [TITLE], S.TICKET_PRICE AS [PRICE], (SELECT COUNT(*) FROM TICKETS T WHERE T.ID_SESSION=S.ID_SESSION GROUP BY T.ID_SESSION ) AS QUANTITY FROM [SESSIONS] S, MOVIES M, ORDERS O, TICKETS TT WHERE '" + dataSet.Rows[0][0].ToString() + "'= O.ID_CLIENT AND O.ID_ORDER=TT.ID_ORDER AND TT.ID_SESSION=S.ID_SESSION AND M.ID_MOVIE=S.ID_MOVIE", selectConnection);
+                SqlDataAdapter dataAd = new SqlDataAdapter("SELECT DISTINCT S.SESSION_DATE AS [DATE], S.SESSION_TIME AS [TIME], M.MOVIE_TITLE AS [TITLE], S.TICKET_PRICE AS [PRICE], (SELECT COUNT(*) FROM TICKETS T, ORDERS OO WHERE T.ID_SESSION=S.ID_SESSION AND T.ID_ORDER=OO.ID_ORDER AND OO.ID_CLIENT=O.ID_CLIENT GROUP BY T.ID_SESSION ) AS QUANTITY, TT.ID_SESSION FROM [SESSIONS] S, MOVIES M, ORDERS O, TICKETS TT WHERE '" + dataSet.Rows[0][0].ToString() +"'= O.ID_CLIENT AND O.ID_ORDER=TT.ID_ORDER AND TT.ID_SESSION=S.ID_SESSION AND M.ID_MOVIE=S.ID_MOVIE" , selectConnection);
                 DataTable data = new DataTable();
                 dataAd.Fill(data);
                 dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
                 dataGridView2.DataSource = data;
             }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (listBox2.SelectedItem == null)
+            {
+                int num = (int)MessageBox.Show("select client first", "Client failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+
+            }
+            else
+            {
+                if (numericUpDown2.Value < 1)
+                {
+                    int num = (int)MessageBox.Show("incorrect number of tickets", "Number of tickets", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                }
+                else
+                {
+                    if(numericUpDown2.Value > (int)dataGridView2.SelectedRows[0].Cells[4].Value)
+                    {
+                        int num = (int)MessageBox.Show("incorrect number of tickets", "Number of tickets", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    }
+                    else
+                    {
+                        SqlDataAdapter dataAdapter1 = new SqlDataAdapter("SELECT ID_CLIENT FROM CLIENTS WHERE FIRST_NAME='" + listBox2.SelectedItem.ToString().Split(' ')[1] + "' AND LAST_NAME='" + listBox2.SelectedItem.ToString().Split(' ')[0] + "'", selectConnection);
+                        DataTable dataSet1 = new DataTable();
+                        dataAdapter1.Fill(dataSet1);
+                        SqlCommand delete1 = new SqlCommand("DELETE TOP("+numericUpDown2.Value+") FROM TICKETS WHERE ID_SESSION = '" + (int)dataGridView2.SelectedRows[0].Cells[5].Value + "'AND ID_ORDER IN (SELECT ID_ORDER FROM ORDERS WHERE ID_CLIENT='"+ dataSet1.Rows[0][0].ToString() + "')", selectConnection);
+                        delete1.ExecuteNonQuery();
+                        SqlDataAdapter dataAd1 = new SqlDataAdapter("SELECT DISTINCT S.SESSION_DATE AS [DATE], S.SESSION_TIME AS [TIME], M.MOVIE_TITLE AS [TITLE], S.TICKET_PRICE AS [PRICE], (SELECT COUNT(*) FROM TICKETS T, ORDERS OO WHERE T.ID_SESSION=S.ID_SESSION AND T.ID_ORDER=OO.ID_ORDER AND OO.ID_CLIENT=O.ID_CLIENT GROUP BY T.ID_SESSION ) AS QUANTITY, TT.ID_SESSION FROM [SESSIONS] S, MOVIES M, ORDERS O, TICKETS TT WHERE '" + dataSet1.Rows[0][0].ToString() + "'= O.ID_CLIENT AND O.ID_ORDER=TT.ID_ORDER AND TT.ID_SESSION=S.ID_SESSION AND M.ID_MOVIE=S.ID_MOVIE", selectConnection);
+                        DataTable data1 = new DataTable();
+                        dataAd1.Fill(data1);
+                        dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                        dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+                        dataGridView2.DataSource = data1;
+                    }
+                }
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            AddClient add = new AddClient(this, connection);
+            add.Show();
         }
     }
 }
