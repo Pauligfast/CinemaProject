@@ -27,6 +27,7 @@ namespace Cinema
         private String connection;
         private ListBox listBox1;
         private IContainer components = (IContainer) null;
+        private SqlConnection selectConnection;
 
     public UserForm(Form1 parent, String con, String logid)
     {
@@ -117,9 +118,12 @@ namespace Cinema
             this.button1.TabIndex = 4;
             this.button1.Text = "Add tickets";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(237, 17);
             this.dataGridView1.Name = "dataGridView1";
@@ -157,7 +161,7 @@ namespace Cinema
 
         private void UserForm_Load(object sender, EventArgs e)
         {
-            SqlConnection selectConnection = new SqlConnection(connection);
+            selectConnection = new SqlConnection(connection);
             selectConnection.Open();
             SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM dbo.SESSIONS_IN_CINEMA ( (SELECT ID_CINEMA FROM EMPLOYEES WHERE ID_EMPLOYEE ="+loginEmployee_ID+") )", selectConnection);
             DataTable dataSet = new DataTable();
@@ -180,6 +184,22 @@ namespace Cinema
             parent.Show();
             parent.textBox1.Clear();
             parent.textBox2.Clear();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem == null)
+            {
+                int num = (int)MessageBox.Show("unselected client", "Client failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+            else
+            {
+                SqlDataAdapter dataAdapter3 = new SqlDataAdapter("SELECT ID_CLIENT FROM CLIENTS WHERE FIRST_NAME="+listBox1.SelectedItem.ToString().Split(' ')[1] +"AND LAST_NAME="+ listBox1.SelectedItem.ToString().Split(' ')[0], selectConnection);
+                DataTable dataSet3 = new DataTable();
+                dataAdapter3.Fill(dataSet3);
+
+
+            }
         }
     }
 }
