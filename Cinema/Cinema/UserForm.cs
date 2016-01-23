@@ -32,6 +32,8 @@ namespace Cinema
         private NumericUpDown numericUpDown1;
         private String ClientId;
         private String SessionId;
+        private String CinemaId;
+        private DataTable dataSet;
 
     public UserForm(Form1 parent, String con, String logid)
     {
@@ -52,17 +54,17 @@ namespace Cinema
     {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.button2 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -91,6 +93,18 @@ namespace Cinema
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Sales";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(554, 293);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(66, 22);
+            this.numericUpDown1.TabIndex = 11;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // button2
             // 
@@ -138,7 +152,9 @@ namespace Cinema
             this.dataGridView1.Location = new System.Drawing.Point(237, 17);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(651, 227);
             this.dataGridView1.TabIndex = 1;
             // 
@@ -151,18 +167,6 @@ namespace Cinema
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Ticket refunds";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(554, 293);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(66, 22);
-            this.numericUpDown1.TabIndex = 11;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // UserForm
             // 
@@ -177,8 +181,8 @@ namespace Cinema
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
     }
@@ -187,8 +191,12 @@ namespace Cinema
         {
             selectConnection = new SqlConnection(connection);
             selectConnection.Open();
-            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM dbo.SESSIONS_IN_CINEMA ( (SELECT ID_CINEMA FROM EMPLOYEES WHERE ID_EMPLOYEE ="+loginEmployee_ID+") )", selectConnection);
-            DataTable dataSet = new DataTable();
+            SqlDataAdapter sql = new SqlDataAdapter("SELECT ID_CINEMA FROM EMPLOYEES WHERE ID_EMPLOYEE =" + loginEmployee_ID, selectConnection);
+            DataTable t = new DataTable();
+            sql.Fill(t);
+            CinemaId = t.Rows[0][0].ToString();
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM dbo.SESSIONS_IN_CINEMA ("+CinemaId+")", selectConnection);
+            dataSet = new DataTable();
             dataAdapter.Fill(dataSet);
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
@@ -201,6 +209,8 @@ namespace Cinema
             {
                 listBox1.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
             }
+            dataAdapter = new SqlDataAdapter("SELECT * FROM SESSIONS WHERE ID_CINEMA="+CinemaId, selectConnection);
+            dataAdapter.Fill(dataSet);
         }
 
         private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -225,14 +235,22 @@ namespace Cinema
                 }
                 else
                 {
-
-
+                    //w grid view mam zaznaczone dane, w secie mam z id te sesje
+                    SqlDataAdapter data = new SqlDataAdapter("SELECT ID_ROOM FROM ROOMS WHERE ROOM_NAME='" + dataGridView1.SelectedRows[0].Cells[3].Value.ToString() + "' AND ID_CINEMA='" + CinemaId + "'", selectConnection);
+                    DataTable dataT = new DataTable();
+                    data.Fill(dataT); //jeszcze wyciągnąc date, time i bydzie
+                    data = new SqlDataAdapter("SELECT ID_SESSION FROM SESSIONS WHERE SESSION_DATE='" 
+                                                + dataGridView1.SelectedRows[0].Cells[0].Value.ToString() + "' AND SESSION_TIME='" 
+                                                + dataGridView1.SelectedRows[0].Cells[1].Value.ToString()+"' AND ID_ROOM='" 
+                                                + dataT.Rows[0][0].ToString()+"'", selectConnection);
+                    data.Fill(dataT);
                     int i = (int)numericUpDown1.Value;
-                    SqlCommand insert = new SqlCommand("INSERT INTO TICKETS VALUES(" + OrderId + ","+SessionId+")", selectConnection); //still session?
-                    for (int j=0; j< i; j++)
+                    SqlCommand insert = new SqlCommand("INSERT INTO TICKETS VALUES(" + OrderId + "," + dataT.Rows[0][0].ToString() + ")", selectConnection);
+                    for (int j = 0; j < i; j++)
                     {
-                        insert.ExecuteNonQuery();
+                         insert.ExecuteNonQuery();
                     }
+                    
                 }
             }
         }
