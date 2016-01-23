@@ -111,6 +111,19 @@ namespace Cinema
             }
         }
 
+        public void refresh_movies()
+        {
+            comboBox2.Items.Clear();
+            SqlConnection selectConnection = new SqlConnection(connection);
+            selectConnection.Open();
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT MOVIE_TITLE FROM MOVIES", selectConnection);
+            DataSet data = new DataSet();
+            dataAdapter.Fill(data);
+            foreach (DataRow dataRow in data.Tables[0].Rows)
+            {
+                comboBox2.Items.Add(dataRow[0].ToString());
+            }
+        }
         private void AdminForm_Load(object sender, EventArgs e)
         {
             SqlConnection selectConnection = new SqlConnection(connection);
@@ -1204,7 +1217,7 @@ namespace Cinema
         {
             if (comboBox2.SelectedIndex != -1)
             {
-                EditMovie edit = new EditMovie(comboBox2.SelectedItem.ToString(),connection);
+                EditMovie edit = new EditMovie(comboBox2.SelectedItem.ToString(), connection, this);
                 edit.Show();
             }
             else {
