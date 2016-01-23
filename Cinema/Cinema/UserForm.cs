@@ -19,7 +19,6 @@ namespace Cinema
         private TabPage tabPage1;
         private TabPage tabPage2;
         private Label label1;
-        private TextBox textBox4;
         private Button button1;
         private DataGridView dataGridView1;
         private String loginEmployee_ID;
@@ -27,7 +26,12 @@ namespace Cinema
         private String connection;
         private ListBox listBox1;
         private IContainer components = (IContainer) null;
+        private Button button2;
         private SqlConnection selectConnection;
+        private String OrderId;
+        private NumericUpDown numericUpDown1;
+        private String ClientId;
+        private String SessionId;
 
     public UserForm(Form1 parent, String con, String logid)
     {
@@ -48,15 +52,17 @@ namespace Cinema
     {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -72,9 +78,10 @@ namespace Cinema
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.numericUpDown1);
+            this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.listBox1);
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.textBox4);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
@@ -84,6 +91,16 @@ namespace Cinema
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Sales";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(305, 283);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(130, 41);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "New order";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // listBox1
             // 
@@ -103,13 +120,6 @@ namespace Cinema
             this.label1.TabIndex = 6;
             this.label1.Text = "How many tickets?";
             // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(557, 302);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(65, 22);
-            this.textBox4.TabIndex = 5;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(699, 283);
@@ -126,6 +136,7 @@ namespace Cinema
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(237, 17);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(651, 227);
@@ -141,6 +152,18 @@ namespace Cinema
             this.tabPage2.Text = "Ticket refunds";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(554, 293);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(66, 22);
+            this.numericUpDown1.TabIndex = 11;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -155,6 +178,7 @@ namespace Cinema
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
     }
@@ -194,10 +218,43 @@ namespace Cinema
             }
             else
             {
-                SqlDataAdapter dataAdapter3 = new SqlDataAdapter("SELECT ID_CLIENT FROM CLIENTS WHERE FIRST_NAME="+listBox1.SelectedItem.ToString().Split(' ')[1] +"AND LAST_NAME="+ listBox1.SelectedItem.ToString().Split(' ')[0], selectConnection);
+                if (OrderId == null)
+                {
+                    int num = (int)MessageBox.Show("Create new order first", "Order failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+
+                }
+                else
+                {
+
+
+                    int i = (int)numericUpDown1.Value;
+                    SqlCommand insert = new SqlCommand("INSERT INTO TICKETS VALUES(" + OrderId + ","+SessionId+")", selectConnection); //still session?
+                    for (int j=0; j< i; j++)
+                    {
+                        insert.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem == null)
+            {
+                int num = (int)MessageBox.Show("unselected client", "Client failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+            else
+            {
+                SqlDataAdapter dataAdapter3 = new SqlDataAdapter("SELECT ID_CLIENT FROM CLIENTS WHERE FIRST_NAME='" + listBox1.SelectedItem.ToString().Split(' ')[1] + "' AND LAST_NAME='" + listBox1.SelectedItem.ToString().Split(' ')[0] + "'", selectConnection);
                 DataTable dataSet3 = new DataTable();
                 dataAdapter3.Fill(dataSet3);
-
+                ClientId = dataSet3.Rows[0][0].ToString();
+                SqlCommand insert = new SqlCommand("INSERT INTO ORDERS VALUES(" + loginEmployee_ID + "," + ClientId + ",0,0)", selectConnection);
+                insert.ExecuteNonQuery();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT ID_ORDER FROM ORDERS WHERE ID_EMPLOYEE='" + loginEmployee_ID + "' AND ID_CLIENT='" + ClientId + "'", selectConnection);
+                DataTable data = new DataTable();
+                dataAdapter.Fill(data);
+                OrderId = data.Rows[0][0].ToString();
 
             }
         }
