@@ -63,6 +63,12 @@
     <Compile Include="AddGenre.Designer.cs">
       <DependentUpon>AddGenre.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddMovie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddMovie.Designer.cs">
+      <DependentUpon>AddMovie.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddPosition.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddGenre.resx">
       <DependentUpon>AddGenre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddMovie.resx">
+      <DependentUpon>AddMovie.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddPosition.resx">
       <DependentUpon>AddPosition.cs</DependentUpon>
