@@ -73,6 +73,7 @@ namespace Cinema
         private Button button16;
         private Button button11;
         private Button button1;
+        private Button button12;
         private String loginCinema_ID;
 
         public AdminForm(Form1 parent, String con, String logid)
@@ -309,6 +310,7 @@ namespace Cinema
             this.textBox14 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
             this.Main.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
@@ -727,6 +729,7 @@ namespace Cinema
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.button12);
             this.tabPage5.Controls.Add(this.button11);
             this.tabPage5.Controls.Add(this.button1);
             this.tabPage5.Controls.Add(this.comboBox2);
@@ -871,7 +874,7 @@ namespace Cinema
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(283, 237);
+            this.button1.Location = new System.Drawing.Point(283, 265);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(121, 23);
             this.button1.TabIndex = 33;
@@ -881,13 +884,23 @@ namespace Cinema
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(283, 266);
+            this.button11.Location = new System.Drawing.Point(283, 294);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(121, 23);
             this.button11.TabIndex = 34;
             this.button11.Text = "Add director";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click_1);
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(283, 236);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(121, 23);
+            this.button12.TabIndex = 35;
+            this.button12.Text = "Delete Movie";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click_1);
             // 
             // AdminForm
             // 
@@ -918,7 +931,8 @@ namespace Cinema
 
         private void button15_Click(object sender, EventArgs e)
         {
-
+            AddMovie add = new AddMovie(connection, this);
+            add.Show();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -1338,6 +1352,29 @@ namespace Cinema
         {
             AddGenre add = new AddGenre(connection);
             add.Show();
+        }
+
+        private void button12_Click_1(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex != -1) {
+                SqlConnection selectConnection = new SqlConnection(connection);
+                selectConnection.Open();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT COUNT(*) FROM SESSIONS WHERE ID_MOVIE=(SELECT ID_MOVIE FROM MOVIES WHERE MOVIE_TITLE='"+comboBox2.SelectedItem.ToString()+"')",selectConnection);
+                DataTable d = new DataTable();
+                dataAdapter.Fill(d);
+                if (decimal.Parse(d.Rows[0][0].ToString()) == 0)
+                {
+                    SqlCommand delete = new SqlCommand("DELETE FROM MOVIES WHERE MOVIE_TITLE='" + comboBox2.SelectedItem.ToString() + "'", selectConnection);
+                    delete.ExecuteNonQuery();
+                    refresh_movies();
+                }
+                else {
+                    int num1 = (int)MessageBox.Show("Deletetion movie with active sessions is not permitted", "OOPS", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                }
+            }
+            else {
+                int num1 = (int)MessageBox.Show("Select a movie to delete", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
         }
     }
 }
