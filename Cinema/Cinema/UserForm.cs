@@ -21,15 +21,11 @@ namespace Cinema
         private Label label1;
         private TextBox textBox4;
         private Button button1;
-        private TextBox textBox3;
-        private TextBox textBox2;
         private DataGridView dataGridView1;
-        private TextBox textBox1;
-        private Label label2;
-        private Label label3;
         private String loginCinema_ID;
         private Form1 parent;
         private String connection;
+        private ListBox listBox1;
         private IContainer components = (IContainer) null;
 
     public UserForm(Form1 parent, String con, String logid)
@@ -54,13 +50,9 @@ namespace Cinema
             this.label1 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -79,15 +71,11 @@ namespace Cinema
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.listBox1);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.textBox4);
             this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Controls.Add(this.textBox3);
-            this.tabPage1.Controls.Add(this.textBox2);
             this.tabPage1.Controls.Add(this.dataGridView1);
-            this.tabPage1.Controls.Add(this.textBox1);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -99,7 +87,7 @@ namespace Cinema
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(222, 104);
+            this.label1.Location = new System.Drawing.Point(497, 262);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(125, 17);
             this.label1.TabIndex = 6;
@@ -107,53 +95,28 @@ namespace Cinema
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(382, 132);
+            this.textBox4.Location = new System.Drawing.Point(557, 302);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(65, 22);
             this.textBox4.TabIndex = 5;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(317, 174);
+            this.button1.Location = new System.Drawing.Point(699, 283);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(130, 41);
             this.button1.TabIndex = 4;
-            this.button1.Text = "Add Ticket";
+            this.button1.Text = "Add tickets";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Enabled = false;
-            this.textBox3.Location = new System.Drawing.Point(289, 57);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(160, 22);
-            this.textBox3.TabIndex = 3;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(289, 22);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(161, 22);
-            this.textBox2.TabIndex = 2;
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(475, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(237, 17);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(413, 329);
+            this.dataGridView1.Size = new System.Drawing.Size(651, 227);
             this.dataGridView1.TabIndex = 1;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(8, 12);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(200, 335);
-            this.textBox1.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -165,23 +128,14 @@ namespace Cinema
             this.tabPage2.Text = "Ticket refunds";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // listBox1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(225, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 17);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Client";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(225, 62);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 17);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Session";
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(8, 17);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(211, 324);
+            this.listBox1.TabIndex = 9;
             // 
             // UserForm
             // 
@@ -210,6 +164,14 @@ namespace Cinema
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
             dataGridView1.DataSource = dataSet;
+
+            SqlDataAdapter dataAdapter2 = new SqlDataAdapter("SELECT * FROM CLIENTS", selectConnection);
+            DataTable dataSet2 = new DataTable();
+            dataAdapter2.Fill(dataSet2);
+            foreach(DataRow r in dataSet2.Rows)
+            {
+                listBox1.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
+            }
         }
     }
 }

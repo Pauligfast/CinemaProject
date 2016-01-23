@@ -88,6 +88,14 @@ namespace Cinema
                     {
                         if (!(dataTable.Rows[0][0].ToString() == "False"))
                             return;
+
+                        sqlDataAdapter = new SqlDataAdapter("SELECT ID_LOGIN FROM LOG_IN WHERE USERNAME='" + this.textBox1.Text + "'", selectConnection);
+                        dataTable = new DataTable();
+                        sqlDataAdapter.Fill(dataTable);
+
+                        sqlDataAdapter = new SqlDataAdapter("SELECT ID_CINEMA FROM EMPLOYEES e JOIN LOG_IN l ON l.ID_EMPLOYEE=e.ID_EMPLOYEE WHERE ID_LOGIN=" + dataTable.Rows[0][0].ToString(), selectConnection);
+                        dataTable = new DataTable();
+                        sqlDataAdapter.Fill(dataTable);
                         UserForm userForm = new UserForm(this, connection, dataTable.Rows[0][0].ToString());
                         this.Visible = false;
                         userForm.Show();
