@@ -15,9 +15,16 @@ namespace Cinema
     {
         public String connection;
         public AdminForm parent;
+        public UserForm parent1;
         public AddClient(AdminForm parent, String loginid, String connection)
         {
             this.parent = parent;
+            this.connection = connection;
+            InitializeComponent();
+        }
+        public AddClient(UserForm parent, String connection)
+        {
+            this.parent1 = parent;
             this.connection = connection;
             InitializeComponent();
         }
@@ -46,7 +53,14 @@ namespace Cinema
                     
                     SqlCommand insert = new SqlCommand("INSERT INTO CLIENTS VALUES('" + first + "','" + last + "','" + phone + "','" + mail + "', 0)", selectConnection);
                     insert.ExecuteNonQuery();
-                    parent.refresh_listbox2();
+                    if (parent1 == null)
+                    {
+                        parent.refresh_listbox2();
+                    }
+                    else
+                    {
+                        parent1.refresh_listbox();
+                    }
                     this.Close();
                 }
                 else {

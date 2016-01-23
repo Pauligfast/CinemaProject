@@ -315,6 +315,20 @@ namespace Cinema
 
     }
 
+        internal void refresh_listbox()
+        {
+            SqlDataAdapter dataAdapter2 = new SqlDataAdapter("SELECT * FROM CLIENTS", selectConnection);
+            DataTable dataSet2 = new DataTable();
+            dataAdapter2.Fill(dataSet2);
+            listBox1.Items.Clear();
+            listBox2.Items.Clear();
+            foreach (DataRow r in dataSet2.Rows)
+            {
+                listBox1.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
+                listBox2.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
+            }
+        }
+
         private void UserForm_Load(object sender, EventArgs e)
         {
             selectConnection = new SqlConnection(connection);
@@ -573,7 +587,8 @@ namespace Cinema
 
         private void button7_Click(object sender, EventArgs e)
         {
-
+            AddClient add = new AddClient(this, connection);
+            add.Show();
         }
     }
 }
