@@ -1381,7 +1381,7 @@ namespace Cinema
                     SqlCommand delete = new SqlCommand("DELETE FROM MOVIES WHERE MOVIE_TITLE='" + comboBox2.SelectedItem.ToString() + "'", selectConnection);
                     delete.ExecuteNonQuery();
                     refresh_movies();
-                    MessageBox.Show("Movie has been deleted", "Succes");
+                    MessageBox.Show("Movie has been deleted", "Success");
                 }
                 else {
                     int num1 = (int)MessageBox.Show("Deletetion movie with active sessions is not permitted", "OOPS", MessageBoxButtons.OK, MessageBoxIcon.Hand);
@@ -1405,7 +1405,7 @@ namespace Cinema
                 SqlCommand delete = new SqlCommand("DELETE FROM LOG_IN WHERE ID_EMPLOYEE=(SELECT ID_EMPLOYEE FROM EMPLOYEES WHERE FIRST_NAME='"+first+"' AND LAST_NAME='"+last+"')", selectConnection);
                 delete.ExecuteNonQuery();
                
-                MessageBox.Show("Employee has been deleted", "Succes");
+                MessageBox.Show("Employee has been deleted", "Success");
                 
                
             }
