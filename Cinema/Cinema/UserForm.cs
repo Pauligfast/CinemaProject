@@ -474,7 +474,7 @@ namespace Cinema
                 ClientId = dataSet3.Rows[0][0].ToString();
                 SqlCommand insert = new SqlCommand("INSERT INTO ORDERS VALUES(" + loginEmployee_ID + "," + ClientId + ",0,0)", selectConnection);
                 insert.ExecuteNonQuery();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT ID_ORDER FROM ORDERS WHERE ID_EMPLOYEE='" + loginEmployee_ID + "' AND ID_CLIENT='" + ClientId + "'", selectConnection);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT ID_ORDER FROM ORDERS WHERE ID_EMPLOYEE='" + loginEmployee_ID + "' AND ID_CLIENT='" + ClientId + "' ORDER BY ID_ORDER DESC", selectConnection);
                 DataTable data = new DataTable();
                 dataAdapter.Fill(data);
                 OrderId = data.Rows[0][0].ToString();
@@ -539,7 +539,7 @@ namespace Cinema
                 SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT ID_CLIENT FROM CLIENTS WHERE FIRST_NAME='" + listBox2.SelectedItem.ToString().Split(' ')[1] + "' AND LAST_NAME='" + listBox2.SelectedItem.ToString().Split(' ')[0] + "'", selectConnection);
                 DataTable dataSet = new DataTable();
                 dataAdapter.Fill(dataSet);
-                SqlDataAdapter dataAd = new SqlDataAdapter("SELECT DISTINCT S.SESSION_DATE AS [DATE], S.SESSION_TIME AS [TIME], M.MOVIE_TITLE AS [TITLE], S.TICKET_PRICE AS [PRICE], (SELECT COUNT(*) FROM TICKETS T WHERE T.ID_SESSION=S.ID_SESSION GROUP BY T.ID_SESSION ) AS QUANTITY, O.ID_ORDER FROM [SESSIONS] S, MOVIES M, ORDERS O, TICKETS TT WHERE '" + dataSet.Rows[0][0].ToString() + "'= O.ID_CLIENT AND O.ID_ORDER=TT.ID_ORDER AND TT.ID_SESSION=S.ID_SESSION AND M.ID_MOVIE=S.ID_MOVIE", selectConnection);
+                SqlDataAdapter dataAd = new SqlDataAdapter("SELECT DISTINCT S.SESSION_DATE AS [DATE], S.SESSION_TIME AS [TIME], M.MOVIE_TITLE AS [TITLE], S.TICKET_PRICE AS [PRICE], (SELECT COUNT(*) FROM TICKETS T, ORDERS OO WHERE T.ID_SESSION=S.ID_SESSION AND T.ID_ORDER=OO.ID_ORDER AND OO.ID_CLIENT=O.ID_CLIENT GROUP BY T.ID_SESSION ) AS QUANTITY, TT.ID_SESSION FROM [SESSIONS] S, MOVIES M, ORDERS O, TICKETS TT WHERE '" + dataSet.Rows[0][0].ToString() +"'= O.ID_CLIENT AND O.ID_ORDER=TT.ID_ORDER AND TT.ID_SESSION=S.ID_SESSION AND M.ID_MOVIE=S.ID_MOVIE" , selectConnection);
                 DataTable data = new DataTable();
                 dataAd.Fill(data);
                 dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -572,9 +572,9 @@ namespace Cinema
                         SqlDataAdapter dataAdapter1 = new SqlDataAdapter("SELECT ID_CLIENT FROM CLIENTS WHERE FIRST_NAME='" + listBox2.SelectedItem.ToString().Split(' ')[1] + "' AND LAST_NAME='" + listBox2.SelectedItem.ToString().Split(' ')[0] + "'", selectConnection);
                         DataTable dataSet1 = new DataTable();
                         dataAdapter1.Fill(dataSet1);
-                        SqlCommand delete1 = new SqlCommand("DELETE TOP("+numericUpDown2.Value+") FROM TICKETS WHERE ID_ORDER = '" + (int)dataGridView2.SelectedRows[0].Cells[5].Value + "'", selectConnection);
+                        SqlCommand delete1 = new SqlCommand("DELETE TOP("+numericUpDown2.Value+") FROM TICKETS WHERE ID_SESSION = '" + (int)dataGridView2.SelectedRows[0].Cells[5].Value + "'AND ID_ORDER IN (SELECT ID_ORDER FROM ORDERS WHERE ID_CLIENT='"+ dataSet1.Rows[0][0].ToString() + "')", selectConnection);
                         delete1.ExecuteNonQuery();
-                        SqlDataAdapter dataAd1 = new SqlDataAdapter("SELECT DISTINCT S.SESSION_DATE AS [DATE], S.SESSION_TIME AS [TIME], M.MOVIE_TITLE AS [TITLE], S.TICKET_PRICE AS [PRICE], (SELECT COUNT(*) FROM TICKETS T WHERE T.ID_SESSION=S.ID_SESSION GROUP BY T.ID_SESSION ) AS QUANTITY, O.ID_ORDER  FROM [SESSIONS] S, MOVIES M, ORDERS O, TICKETS TT WHERE '" + dataSet1.Rows[0][0].ToString() + "'= O.ID_CLIENT AND O.ID_ORDER=TT.ID_ORDER AND TT.ID_SESSION=S.ID_SESSION AND M.ID_MOVIE=S.ID_MOVIE", selectConnection);
+                        SqlDataAdapter dataAd1 = new SqlDataAdapter("SELECT DISTINCT S.SESSION_DATE AS [DATE], S.SESSION_TIME AS [TIME], M.MOVIE_TITLE AS [TITLE], S.TICKET_PRICE AS [PRICE], (SELECT COUNT(*) FROM TICKETS T, ORDERS OO WHERE T.ID_SESSION=S.ID_SESSION AND T.ID_ORDER=OO.ID_ORDER AND OO.ID_CLIENT=O.ID_CLIENT GROUP BY T.ID_SESSION ) AS QUANTITY, TT.ID_SESSION FROM [SESSIONS] S, MOVIES M, ORDERS O, TICKETS TT WHERE '" + dataSet1.Rows[0][0].ToString() + "'= O.ID_CLIENT AND O.ID_ORDER=TT.ID_ORDER AND TT.ID_SESSION=S.ID_SESSION AND M.ID_MOVIE=S.ID_MOVIE", selectConnection);
                         DataTable data1 = new DataTable();
                         dataAd1.Fill(data1);
                         dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
