@@ -1004,7 +1004,7 @@ namespace Cinema
                 dataAdapter = new SqlDataAdapter("SELECT SALARY FROM EMPLOYEES WHERE FIRST_NAME='" + textBox11.Text.ToString() + "' AND LAST_NAME='" + textBox3.Text.ToString() + "'", connection);
                 dataTable = new DataTable();
                 dataAdapter.Fill(dataTable);
-                textBox2.Text = dataTable.Rows[0]["SALARY"].ToString();
+                //textBox2.Text = dataTable.Rows[0]["SALARY"].ToString();
             }
             catch (SqlException exc)
             {
