@@ -352,8 +352,6 @@ namespace Cinema
                 listBox1.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
                 listBox2.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
             }
-            dataAdapter = new SqlDataAdapter("SELECT * FROM SESSIONS WHERE ID_ROOM IN (SELECT ID_ROOM FROM ROOMS WHERE ID_CINEMA="+CinemaId, selectConnection);
-            dataAdapter.Fill(dataSet);
         }
 
         private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
