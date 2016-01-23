@@ -84,7 +84,7 @@ namespace Cinema
                 String rating = comboBox1.SelectedItem.ToString();
                 String director = comboBox2.SelectedItem.ToString();
                 String genre = comboBox3.SelectedItem.ToString();
-                int num1 = (int)MessageBox.Show(rating+duration, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+               // int num1 = (int)MessageBox.Show(rating+duration, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 SqlCommand insert = new SqlCommand("INSERT INTO MOVIES VALUES('" + title + "'," + duration + ",(SELECT TOP(1) ID_RATING FROM RATING WHERE RATING='" + rating + "'),(SELECT TOP(1) ID_DIRECTOR FROM DIRECTORS WHERE LAST_NAME='" + director + "'),(SELECT ID_GENRE FROM GENRES WHERE GENRE_NAME='" + genre + "'), " + year + ",'" + descritpion + "')", selectConnection);
                 insert.ExecuteNonQuery();
 
