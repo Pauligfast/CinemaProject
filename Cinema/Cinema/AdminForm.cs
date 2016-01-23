@@ -74,6 +74,7 @@ namespace Cinema
         private Button button11;
         private Button button1;
         private Button button12;
+        private Button button13;
         private String loginCinema_ID;
 
         public AdminForm(Form1 parent, String con, String logid)
@@ -311,6 +312,7 @@ namespace Cinema
             this.button1 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
             this.Main.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
@@ -332,12 +334,13 @@ namespace Cinema
             this.Main.Location = new System.Drawing.Point(0, 0);
             this.Main.Name = "Main";
             this.Main.SelectedIndex = 0;
-            this.Main.Size = new System.Drawing.Size(845, 345);
+            this.Main.Size = new System.Drawing.Size(845, 349);
             this.Main.TabIndex = 0;
             this.Main.SelectedIndexChanged += new System.EventHandler(this.Main_SelectedIndexChanged);
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button13);
             this.tabPage2.Controls.Add(this.button16);
             this.tabPage2.Controls.Add(this.comboBox3);
             this.tabPage2.Controls.Add(this.dataGridView4);
@@ -355,7 +358,7 @@ namespace Cinema
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(837, 319);
+            this.tabPage2.Size = new System.Drawing.Size(837, 323);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Employees";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -747,7 +750,7 @@ namespace Cinema
             this.tabPage5.Controls.Add(this.textBox14);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(837, 319);
+            this.tabPage5.Size = new System.Drawing.Size(837, 323);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Movies";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -902,11 +905,21 @@ namespace Cinema
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click_1);
             // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(229, 235);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(96, 45);
+            this.button13.TabIndex = 33;
+            this.button13.Text = "Delete employee";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click_1);
+            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(845, 345);
+            this.ClientSize = new System.Drawing.Size(845, 349);
             this.Controls.Add(this.Main);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AdminForm";
@@ -1356,10 +1369,11 @@ namespace Cinema
 
         private void button12_Click_1(object sender, EventArgs e)
         {
-            if (comboBox2.SelectedIndex != -1) {
+            if (comboBox2.SelectedIndex != -1)
+            {
                 SqlConnection selectConnection = new SqlConnection(connection);
                 selectConnection.Open();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT COUNT(*) FROM SESSIONS WHERE ID_MOVIE=(SELECT ID_MOVIE FROM MOVIES WHERE MOVIE_TITLE='"+comboBox2.SelectedItem.ToString()+"')",selectConnection);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT COUNT(*) FROM SESSIONS WHERE ID_MOVIE=(SELECT ID_MOVIE FROM MOVIES WHERE MOVIE_TITLE='" + comboBox2.SelectedItem.ToString() + "')", selectConnection);
                 DataTable d = new DataTable();
                 dataAdapter.Fill(d);
                 if (decimal.Parse(d.Rows[0][0].ToString()) == 0)
@@ -1367,6 +1381,7 @@ namespace Cinema
                     SqlCommand delete = new SqlCommand("DELETE FROM MOVIES WHERE MOVIE_TITLE='" + comboBox2.SelectedItem.ToString() + "'", selectConnection);
                     delete.ExecuteNonQuery();
                     refresh_movies();
+                    MessageBox.Show("Movie has been deleted", "Succes");
                 }
                 else {
                     int num1 = (int)MessageBox.Show("Deletetion movie with active sessions is not permitted", "OOPS", MessageBoxButtons.OK, MessageBoxIcon.Hand);
@@ -1374,6 +1389,28 @@ namespace Cinema
             }
             else {
                 int num1 = (int)MessageBox.Show("Select a movie to delete", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+        }
+
+        private void button13_Click_1(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1)
+            {
+                SqlConnection selectConnection = new SqlConnection(connection);
+                selectConnection.Open();
+                String last = listBox1.SelectedItem.ToString().Split(' ')[0];
+                String first = listBox1.SelectedItem.ToString().Split(' ')[1];
+
+
+                SqlCommand delete = new SqlCommand("DELETE FROM LOG_IN WHERE ID_EMPLOYEE=(SELECT ID_EMPLOYEE FROM EMPLOYEES WHERE FIRST_NAME='"+first+"' AND LAST_NAME='"+last+"')", selectConnection);
+                delete.ExecuteNonQuery();
+               
+                MessageBox.Show("Employee has been deleted", "Succes");
+                
+               
+            }
+            else {
+                int num1 = (int)MessageBox.Show("Select employee", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
     }
