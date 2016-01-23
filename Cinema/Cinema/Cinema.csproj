@@ -75,6 +75,12 @@
     <Compile Include="AddPosition.Designer.cs">
       <DependentUpon>AddPosition.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddSession.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddSession.Designer.cs">
+      <DependentUpon>AddSession.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddPosition.resx">
       <DependentUpon>AddPosition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddSession.resx">
+      <DependentUpon>AddSession.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdminForm.resx" />
     <EmbeddedResource Include="EditMovie.resx">
