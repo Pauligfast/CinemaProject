@@ -44,7 +44,6 @@ namespace Cinema
         private TextBox textBox3;
         private TextBox textBox11;
         public ListBox listBox1;
-        private Button button11;
         private Button button10;
         private Button button9;
         private Button button8;
@@ -95,6 +94,19 @@ namespace Cinema
             foreach (DataRow r in dataTable.Rows)
             {
                 listBox1.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
+            }
+        }
+
+        public void refresh_listbox2()
+        {
+            SqlConnection selectConnection = new SqlConnection(connection);
+            selectConnection.Open();
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM CLIENTS", connection);
+            DataTable dataTable = new DataTable();
+            dataAdapter.Fill(dataTable);
+            foreach (DataRow r in dataTable.Rows)
+            {
+                listBox2.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
             }
         }
 
@@ -253,7 +265,6 @@ namespace Cinema
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
@@ -539,7 +550,6 @@ namespace Cinema
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.dataGridView3);
-            this.tabPage4.Controls.Add(this.button11);
             this.tabPage4.Controls.Add(this.button10);
             this.tabPage4.Controls.Add(this.button9);
             this.tabPage4.Controls.Add(this.button8);
@@ -571,21 +581,11 @@ namespace Cinema
             this.dataGridView3.Size = new System.Drawing.Size(379, 320);
             this.dataGridView3.TabIndex = 15;
             // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(227, 259);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(121, 23);
-            this.button11.TabIndex = 14;
-            this.button11.Text = "Delete";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
-            // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(227, 230);
+            this.button10.Location = new System.Drawing.Point(227, 208);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(121, 23);
+            this.button10.Size = new System.Drawing.Size(96, 23);
             this.button10.TabIndex = 13;
             this.button10.Text = "Add new client";
             this.button10.UseVisualStyleBackColor = true;
@@ -1077,7 +1077,8 @@ namespace Cinema
 
         private void button10_Click(object sender, EventArgs e)
         {
-
+            AddClient add = new AddClient(this, loginCinema_ID, connection);
+            add.Show();
         }
 
         private void button9_Click(object sender, EventArgs e)
