@@ -218,6 +218,7 @@ namespace Cinema
             this.button3.TabIndex = 2;
             this.button3.Text = "Show orders";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -227,6 +228,7 @@ namespace Cinema
             this.button4.TabIndex = 3;
             this.button4.Text = "Delete order";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
@@ -236,6 +238,7 @@ namespace Cinema
             this.button5.TabIndex = 4;
             this.button5.Text = "Show sessions";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
@@ -316,22 +319,34 @@ namespace Cinema
                 }
                 else
                 {
-                    //w grid view mam zaznaczone dane, w secie mam z id te sesje
-                    SqlDataAdapter data = new SqlDataAdapter("SELECT ID_ROOM FROM ROOMS WHERE ROOM_NAME='" + dataGridView1.SelectedRows[0].Cells[3].Value.ToString() + "' AND ID_CINEMA='" + CinemaId + "'", selectConnection);
-                    DataTable dataT = new DataTable();
-                    data.Fill(dataT); //jeszcze wyciągnąc date, time i bydzie
-                    data = new SqlDataAdapter("SELECT ID_SESSION FROM SESSIONS WHERE SESSION_DATE='" 
-                                                + dataGridView1.SelectedRows[0].Cells[0].Value.ToString() + "' AND SESSION_TIME='" 
-                                                + dataGridView1.SelectedRows[0].Cells[1].Value.ToString()+"' AND ID_ROOM='" 
-                                                + dataT.Rows[0][0].ToString()+"'", selectConnection);
-                    data.Fill(dataT);
-                    int i = (int)numericUpDown1.Value;
-                    SqlCommand insert = new SqlCommand("INSERT INTO TICKETS VALUES(" + OrderId + "," + dataT.Rows[0][0].ToString() + ")", selectConnection);
-                    for (int j = 0; j < i; j++)
+                    SqlDataAdapter dataAda = new SqlDataAdapter("SELECT ID_CLIENT FROM ORDERS WHERE ID_ORDER ='" + OrderId + "'", selectConnection);
+                    DataTable datah = new DataTable();
+                    dataAda.Fill(datah);
+                    SqlDataAdapter dataAdapter3 = new SqlDataAdapter("SELECT ID_CLIENT FROM CLIENTS WHERE FIRST_NAME='" + listBox1.SelectedItem.ToString().Split(' ')[1] + "' AND LAST_NAME='" + listBox1.SelectedItem.ToString().Split(' ')[0] + "'", selectConnection);
+                    DataTable dataSet3 = new DataTable();
+                    dataAdapter3.Fill(dataSet3);
+                    if (dataSet3.Rows[0][0].ToString().Equals(datah.Rows[0][0].ToString()))
                     {
-                         insert.ExecuteNonQuery();
+                        SqlDataAdapter data = new SqlDataAdapter("SELECT ID_ROOM FROM ROOMS WHERE ROOM_NAME='" + dataGridView1.SelectedRows[0].Cells[3].Value.ToString() + "' AND ID_CINEMA='" + CinemaId + "'", selectConnection);
+                        DataTable dataT = new DataTable();
+                        data.Fill(dataT); 
+                        data = new SqlDataAdapter("SELECT ID_SESSION FROM SESSIONS WHERE SESSION_DATE='"
+                                                    + dataGridView1.SelectedRows[0].Cells[0].Value.ToString() + "' AND SESSION_TIME='"
+                                                    + dataGridView1.SelectedRows[0].Cells[1].Value.ToString() + "' AND ID_ROOM='"
+                                                    + dataT.Rows[0][0].ToString() + "'", selectConnection);
+                        data.Fill(dataT);
+                        int i = (int)numericUpDown1.Value;
+                        SqlCommand insert = new SqlCommand("INSERT INTO TICKETS VALUES(" + OrderId + "," + dataT.Rows[0][0].ToString() + ")", selectConnection);
+                        for (int j = 0; j < i; j++)
+                        {
+                            insert.ExecuteNonQuery();
+                        }
                     }
-                    
+                    else
+                    {
+                        int num = (int)MessageBox.Show("Create new order for this client first", "Order failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    }
+
                 }
             }
         }
@@ -355,6 +370,52 @@ namespace Cinema
                 dataAdapter.Fill(data);
                 OrderId = data.Rows[0][0].ToString();
 
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (listBox2.SelectedItem == null)
+            {
+                int num = (int)MessageBox.Show("unselected client", "Client failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+            else
+            {
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT ID_CLIENT FROM CLIENTS WHERE FIRST_NAME='" + listBox2.SelectedItem.ToString().Split(' ')[1] + "' AND LAST_NAME='" + listBox2.SelectedItem.ToString().Split(' ')[0] + "'", selectConnection);
+                DataTable dataSet = new DataTable();
+                dataAdapter.Fill(dataSet);
+                dataAdapter = new SqlDataAdapter("SELECT ID_EMPLOYEE AS [SOLD BY], SUM, QUANTITY FROM ORDERS WHERE ID_CLIENT='" + dataSet.Rows[0][0].ToString()+"'", selectConnection);
+                dataSet = new DataTable();
+                dataAdapter.Fill(dataSet);
+                dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+                dataGridView2.DataSource = dataSet;
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (listBox2.SelectedItem == null)
+            {
+                int num = (int)MessageBox.Show("unselected client", "Client failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+
+            }
+            else
+            {
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT ID_CLIENT FROM CLIENTS WHERE FIRST_NAME='" + listBox2.SelectedItem.ToString().Split(' ')[1] + "' AND LAST_NAME='" + listBox2.SelectedItem.ToString().Split(' ')[0] + "'", selectConnection);
+                DataTable dataSet = new DataTable();
+                dataAdapter.Fill(dataSet);
+                SqlDataAdapter dataAd = new SqlDataAdapter("SELECT DISTINCT S.SESSION_DATE AS [DATE], S.SESSION_TIME AS [TIME], M.MOVIE_TITLE AS [TITLE], S.TICKET_PRICE AS [PRICE], (SELECT COUNT(*) FROM TICKETS T WHERE T.ID_SESSION=S.ID_SESSION GROUP BY T.ID_SESSION ) AS QUANTITY FROM [SESSIONS] S, MOVIES M, ORDERS O, TICKETS TT WHERE '" + dataSet.Rows[0][0].ToString() + "'= O.ID_CLIENT AND O.ID_ORDER=TT.ID_ORDER AND TT.ID_SESSION=S.ID_SESSION AND M.ID_MOVIE=S.ID_MOVIE", selectConnection);
+                DataTable data = new DataTable();
+                dataAd.Fill(data);
+                dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+                dataGridView2.DataSource = data;
             }
         }
     }
