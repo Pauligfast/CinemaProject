@@ -363,9 +363,9 @@ namespace Cinema
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(343, 147);
+            this.button16.Location = new System.Drawing.Point(341, 184);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(96, 23);
+            this.button16.Size = new System.Drawing.Size(98, 45);
             this.button16.TabIndex = 32;
             this.button16.Text = "New positon";
             this.button16.UseVisualStyleBackColor = true;
@@ -383,7 +383,7 @@ namespace Cinema
             // dataGridView4
             // 
             this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Location = new System.Drawing.Point(452, 1);
+            this.dataGridView4.Location = new System.Drawing.Point(453, 0);
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.Size = new System.Drawing.Size(384, 321);
             this.dataGridView4.TabIndex = 30;
@@ -391,9 +391,9 @@ namespace Cinema
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(229, 147);
+            this.button2.Location = new System.Drawing.Point(229, 184);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(96, 23);
+            this.button2.Size = new System.Drawing.Size(96, 45);
             this.button2.TabIndex = 28;
             this.button2.Text = "New employee";
             this.button2.UseVisualStyleBackColor = true;
@@ -401,9 +401,9 @@ namespace Cinema
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(229, 105);
+            this.button3.Location = new System.Drawing.Point(229, 133);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(96, 23);
+            this.button3.Size = new System.Drawing.Size(96, 45);
             this.button3.TabIndex = 27;
             this.button3.Text = "Save changes";
             this.button3.UseVisualStyleBackColor = true;
@@ -411,9 +411,9 @@ namespace Cinema
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(341, 105);
+            this.button7.Location = new System.Drawing.Point(341, 133);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(98, 23);
+            this.button7.Size = new System.Drawing.Size(98, 45);
             this.button7.TabIndex = 26;
             this.button7.Text = "Undo";
             this.button7.UseVisualStyleBackColor = true;
@@ -600,9 +600,9 @@ namespace Cinema
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(227, 208);
+            this.button10.Location = new System.Drawing.Point(227, 222);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(96, 23);
+            this.button10.Size = new System.Drawing.Size(96, 55);
             this.button10.TabIndex = 13;
             this.button10.Text = "Add new client";
             this.button10.UseVisualStyleBackColor = true;
@@ -612,7 +612,7 @@ namespace Cinema
             // 
             this.button9.Location = new System.Drawing.Point(227, 147);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(96, 23);
+            this.button9.Size = new System.Drawing.Size(96, 55);
             this.button9.TabIndex = 12;
             this.button9.Text = "Save changes";
             this.button9.UseVisualStyleBackColor = true;
@@ -622,7 +622,7 @@ namespace Cinema
             // 
             this.button8.Location = new System.Drawing.Point(339, 147);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(98, 23);
+            this.button8.Size = new System.Drawing.Size(98, 55);
             this.button8.TabIndex = 11;
             this.button8.Text = "Undo";
             this.button8.UseVisualStyleBackColor = true;
