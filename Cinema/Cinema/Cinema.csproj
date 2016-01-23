@@ -51,6 +51,12 @@
     <Compile Include="AddEmployee.Designer.cs">
       <DependentUpon>AddEmployee.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddGenre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddGenre.Designer.cs">
+      <DependentUpon>AddGenre.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddPosition.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,6 +65,12 @@
     </Compile>
     <Compile Include="AdminForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditMovie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditMovie.Designer.cs">
+      <DependentUpon>EditMovie.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -78,10 +90,16 @@
     <EmbeddedResource Include="AddEmployee.resx">
       <DependentUpon>AddEmployee.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddGenre.resx">
+      <DependentUpon>AddGenre.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddPosition.resx">
       <DependentUpon>AddPosition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdminForm.resx" />
+    <EmbeddedResource Include="EditMovie.resx">
+      <DependentUpon>EditMovie.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx" />
     <EmbeddedResource Include="Properties\Resources.resx" />
     <EmbeddedResource Include="UserForm.resx">

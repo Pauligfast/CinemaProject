@@ -52,7 +52,6 @@ namespace Cinema
         private Label label8;
         private Label label7;
         private Label label4;
-        private Button button13;
         private Button button14;
         private Button button15;
         private Label label11;
@@ -72,6 +71,8 @@ namespace Cinema
         private DataGridView dataGridView4;
         private ComboBox comboBox3;
         private Button button16;
+        private Button button11;
+        private Button button1;
         private String loginCinema_ID;
 
         public AdminForm(Form1 parent, String con, String logid)
@@ -283,7 +284,6 @@ namespace Cinema
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.monthCalendar2 = new System.Windows.Forms.MonthCalendar();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
@@ -294,6 +294,8 @@ namespace Cinema
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.textBox13 = new System.Windows.Forms.TextBox();
             this.textBox14 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             this.Main.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
@@ -712,10 +714,11 @@ namespace Cinema
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.button11);
+            this.tabPage5.Controls.Add(this.button1);
             this.tabPage5.Controls.Add(this.comboBox2);
             this.tabPage5.Controls.Add(this.monthCalendar2);
             this.tabPage5.Controls.Add(this.dataGridView2);
-            this.tabPage5.Controls.Add(this.button13);
             this.tabPage5.Controls.Add(this.button14);
             this.tabPage5.Controls.Add(this.button15);
             this.tabPage5.Controls.Add(this.label11);
@@ -760,33 +763,23 @@ namespace Cinema
             this.dataGridView2.TabIndex = 30;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
-            // button13
-            // 
-            this.button13.Location = new System.Drawing.Point(284, 251);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(121, 23);
-            this.button13.TabIndex = 28;
-            this.button13.Text = "Add new client";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
-            // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(284, 193);
+            this.button14.Location = new System.Drawing.Point(283, 178);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(121, 23);
             this.button14.TabIndex = 27;
-            this.button14.Text = "Save changes";
+            this.button14.Text = "Edit movie";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(284, 222);
+            this.button15.Location = new System.Drawing.Point(283, 207);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(121, 23);
             this.button15.TabIndex = 26;
-            this.button15.Text = "Undo";
+            this.button15.Text = "Add new";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -862,6 +855,26 @@ namespace Cinema
             this.textBox14.Size = new System.Drawing.Size(129, 20);
             this.textBox14.TabIndex = 17;
             this.textBox14.TextChanged += new System.EventHandler(this.textBox14_TextChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(283, 237);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(121, 23);
+            this.button1.TabIndex = 33;
+            this.button1.Text = "Add Genre";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_3);
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(283, 266);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(121, 23);
+            this.button11.TabIndex = 34;
+            this.button11.Text = "Add director";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click_1);
             // 
             // AdminForm
             // 
@@ -1189,7 +1202,14 @@ namespace Cinema
 
         private void button14_Click(object sender, EventArgs e)
         {
-
+            if (comboBox2.SelectedIndex != -1)
+            {
+                EditMovie edit = new EditMovie(connection);
+                edit.Show();
+            }
+            else {
+                int num1 = (int)MessageBox.Show("Select a movie to edit", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
         }
 
         private void label12_Click(object sender, EventArgs e)
@@ -1292,6 +1312,17 @@ namespace Cinema
         private void button16_Click(object sender, EventArgs e)
         {
             AddPosition add = new AddPosition(connection);
+            add.Show();
+        }
+
+        private void button11_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_3(object sender, EventArgs e)
+        {
+            AddGenre add = new AddGenre(connection);
             add.Show();
         }
     }
