@@ -969,11 +969,19 @@ namespace Cinema
         {
             try
             {
-                String last = listBox1.SelectedItem.ToString().Split(' ')[0];
-                String first = listBox1.SelectedItem.ToString().Split(' ')[1];
+                String first, last;
+                if (listBox1.SelectedIndex != -1)
+                {
+                    last = listBox1.SelectedItem.ToString().Split(' ')[0];
+                    first = listBox1.SelectedItem.ToString().Split(' ')[1];
+                }
+                else {
+                    last = textBox3.Text.ToString();
+                    first = textBox11.Text.ToString();
+                }
                 SqlConnection selectConnection = new SqlConnection(connection);
                 selectConnection.Open();
-                MessageBox.Show(last+ first);
+
 
                 int d = int.Parse(textBox2.Text.ToString(), System.Globalization.CultureInfo.InvariantCulture);
                 // decimal.Format(Convert.ToDecimal(textBox2.Text.ToString()));
@@ -996,9 +1004,10 @@ namespace Cinema
                 dataAdapter = new SqlDataAdapter("SELECT SALARY FROM EMPLOYEES WHERE FIRST_NAME='" + textBox11.Text.ToString() + "' AND LAST_NAME='" + textBox3.Text.ToString() + "'", connection);
                 dataTable = new DataTable();
                 dataAdapter.Fill(dataTable);
-                //textBox2.Text = dataTable.Rows[0]["SALARY"].ToString();
+                textBox2.Text = dataTable.Rows[0]["SALARY"].ToString();
             }
-            catch (SqlException exc) {
+            catch (SqlException exc)
+            {
                 HandleSqlException(exc);
             }
 
@@ -1122,7 +1131,7 @@ namespace Cinema
             DataTable d = new DataTable();
             dataAdapter.Fill(d);
             String id_session = d.Rows[0][0].ToString();
-           // int num2 = (int)MessageBox.Show(id_session, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            // int num2 = (int)MessageBox.Show(id_session, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             dataAdapter = new SqlDataAdapter("SELECT COUNT(*) FROM TICKETS WHERE ID_SESSION=" + id_session, selectConnection);
             d = new DataTable();
             dataAdapter.Fill(d);
@@ -1167,8 +1176,16 @@ namespace Cinema
         {
             try
             {
-                String last = listBox2.SelectedItem.ToString().Split(' ')[0];
-                String first = listBox2.SelectedItem.ToString().Split(' ')[1];
+                String first, last;
+                if (listBox2.SelectedIndex != -1)
+                {
+                    last = listBox2.SelectedItem.ToString().Split(' ')[0];
+                    first = listBox2.SelectedItem.ToString().Split(' ')[1];
+                }
+                else {
+                    last = textBox4.Text.ToString();
+                    first = textBox11.Text.ToString();
+                }
                 SqlConnection selectConnection = new SqlConnection(connection);
                 selectConnection.Open();
 
@@ -1189,7 +1206,8 @@ namespace Cinema
                 }
 
             }
-            catch (SqlException exc) {
+            catch (SqlException exc)
+            {
                 HandleSqlException(exc);
             }
         }
