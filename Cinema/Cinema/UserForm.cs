@@ -33,6 +33,12 @@ namespace Cinema
         private String ClientId;
         private String SessionId;
         private String CinemaId;
+        private Button button6;
+        private Button button5;
+        private Button button4;
+        private Button button3;
+        private DataGridView dataGridView2;
+        private ListBox listBox2;
         private DataTable dataSet;
 
     public UserForm(Form1 parent, String con, String logid)
@@ -61,10 +67,18 @@ namespace Cinema
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -160,6 +174,12 @@ namespace Cinema
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button6);
+            this.tabPage2.Controls.Add(this.button5);
+            this.tabPage2.Controls.Add(this.button4);
+            this.tabPage2.Controls.Add(this.button3);
+            this.tabPage2.Controls.Add(this.dataGridView2);
+            this.tabPage2.Controls.Add(this.listBox2);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -167,6 +187,64 @@ namespace Cinema
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Ticket refunds";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.ItemHeight = 16;
+            this.listBox2.Location = new System.Drawing.Point(21, 21);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(192, 308);
+            this.listBox2.TabIndex = 0;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(243, 21);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.ReadOnly = true;
+            this.dataGridView2.RowTemplate.Height = 24;
+            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView2.Size = new System.Drawing.Size(442, 308);
+            this.dataGridView2.TabIndex = 1;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(725, 40);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(132, 43);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "Show orders";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(725, 89);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(132, 43);
+            this.button4.TabIndex = 3;
+            this.button4.Text = "Delete order";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(725, 138);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(132, 43);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "Show sessions";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(725, 187);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(132, 43);
+            this.button6.TabIndex = 5;
+            this.button6.Text = "Delete ticket";
+            this.button6.UseVisualStyleBackColor = true;
             // 
             // UserForm
             // 
@@ -183,6 +261,8 @@ namespace Cinema
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
 
     }
@@ -208,6 +288,7 @@ namespace Cinema
             foreach(DataRow r in dataSet2.Rows)
             {
                 listBox1.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
+                listBox2.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
             }
             dataAdapter = new SqlDataAdapter("SELECT * FROM SESSIONS WHERE ID_CINEMA="+CinemaId, selectConnection);
             dataAdapter.Fill(dataSet);
