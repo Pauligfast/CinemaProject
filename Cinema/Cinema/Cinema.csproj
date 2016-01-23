@@ -45,6 +45,12 @@
     <Compile Include="AddClient.Designer.cs">
       <DependentUpon>AddClient.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddDirector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddDirector.Designer.cs">
+      <DependentUpon>AddDirector.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +92,9 @@
   <ItemGroup>
     <EmbeddedResource Include="AddClient.resx">
       <DependentUpon>AddClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddDirector.resx">
+      <DependentUpon>AddDirector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddEmployee.resx">
       <DependentUpon>AddEmployee.cs</DependentUpon>

@@ -63,5 +63,10 @@ namespace Cinema
         {
             Close();
         }
+
+        private void AddClient_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -779,7 +779,7 @@ namespace Cinema
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(121, 23);
             this.button15.TabIndex = 26;
-            this.button15.Text = "Add new";
+            this.button15.Text = "Add movie";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -1204,7 +1204,7 @@ namespace Cinema
         {
             if (comboBox2.SelectedIndex != -1)
             {
-                EditMovie edit = new EditMovie(connection);
+                EditMovie edit = new EditMovie(comboBox2.SelectedItem.ToString(),connection);
                 edit.Show();
             }
             else {
@@ -1317,7 +1317,8 @@ namespace Cinema
 
         private void button11_Click_1(object sender, EventArgs e)
         {
-
+            AddDirector add = new AddDirector(connection);
+            add.Show();
         }
 
         private void button1_Click_3(object sender, EventArgs e)
