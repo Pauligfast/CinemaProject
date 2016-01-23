@@ -32,7 +32,7 @@ namespace Cinema
         private TextBox textBox6;
         private TextBox textBox5;
         private TextBox textBox4;
-        private ListBox listBox2;
+        public ListBox listBox2;
         private Button button2;
         private Button button3;
         private Button button7;
@@ -43,7 +43,7 @@ namespace Cinema
         private TextBox textBox2;
         private TextBox textBox3;
         private TextBox textBox11;
-        private ListBox listBox1;
+        public ListBox listBox1;
         private Button button11;
         private Button button10;
         private Button button9;
@@ -82,6 +82,20 @@ namespace Cinema
             this.connection = con;
             this.parent = parent;
             this.InitializeComponent();
+        }
+
+        public void refresh_listbox1()
+        {
+            SqlConnection selectConnection = new SqlConnection(connection);
+            selectConnection.Open();
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM EMPLOYEES", selectConnection);
+            DataTable dataTable = new DataTable();
+            dataAdapter.Fill(dataTable);
+            listBox1.Items.Clear();
+            foreach (DataRow r in dataTable.Rows)
+            {
+                listBox1.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
+            }
         }
 
         private void AdminForm_Load(object sender, EventArgs e)
@@ -905,7 +919,7 @@ namespace Cinema
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            AddEmployee add = new AddEmployee(loginCinema_ID, connection);
+            AddEmployee add = new AddEmployee(this, loginCinema_ID, connection);
             add.Show();
         }
 

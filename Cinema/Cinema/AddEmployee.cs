@@ -13,10 +13,11 @@ namespace Cinema
 {
     public partial class AddEmployee : Form
     {
-
+        public AdminForm parent;
         public String connection;
-        public AddEmployee(String loginid, String connection)
+        public AddEmployee(AdminForm parent, String loginid, String connection)
         {
+            this.parent = parent;
             this.connection = connection;
             InitializeComponent();
         }
@@ -79,6 +80,7 @@ namespace Cinema
                     insert.ExecuteNonQuery();
                     insert = new SqlCommand("INSERT INTO LOG_IN VALUES('" + first + "','" + last + "', 0,(SELECT ID_EMPLOYEE FROM EMPLOYEES WHERE FIRST_NAME='" + first + "' AND LAST_NAME='" + last + "'))", selectConnection);
                     insert.ExecuteNonQuery();
+                    parent.refresh_listbox1();
                     this.Close();
                 }
                 else {
