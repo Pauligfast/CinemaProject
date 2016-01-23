@@ -22,7 +22,7 @@ namespace Cinema
         private TextBox textBox4;
         private Button button1;
         private DataGridView dataGridView1;
-        private String loginCinema_ID;
+        private String loginEmployee_ID;
         private Form1 parent;
         private String connection;
         private ListBox listBox1;
@@ -30,7 +30,7 @@ namespace Cinema
 
     public UserForm(Form1 parent, String con, String logid)
     {
-            loginCinema_ID = logid;
+            loginEmployee_ID = logid;
             this.connection = con;
             this.parent = parent;
             this.InitializeComponent();
@@ -47,12 +47,12 @@ namespace Cinema
     {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -83,6 +83,15 @@ namespace Cinema
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Sales";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(8, 17);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(211, 324);
+            this.listBox1.TabIndex = 9;
             // 
             // label1
             // 
@@ -128,15 +137,6 @@ namespace Cinema
             this.tabPage2.Text = "Ticket refunds";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(8, 17);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(211, 324);
-            this.listBox1.TabIndex = 9;
-            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -145,6 +145,7 @@ namespace Cinema
             this.Controls.Add(this.tabControl1);
             this.Name = "UserForm";
             this.Text = "UserForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserForm_FormClosing);
             this.Load += new System.EventHandler(this.UserForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -158,7 +159,7 @@ namespace Cinema
         {
             SqlConnection selectConnection = new SqlConnection(connection);
             selectConnection.Open();
-            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM dbo.SESSIONS_IN_CINEMA ('" + loginCinema_ID + "')", selectConnection);
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM dbo.SESSIONS_IN_CINEMA ( (SELECT ID_CINEMA FROM EMPLOYEES WHERE ID_EMPLOYEE ="+loginEmployee_ID+") )", selectConnection);
             DataTable dataSet = new DataTable();
             dataAdapter.Fill(dataSet);
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -172,6 +173,13 @@ namespace Cinema
             {
                 listBox1.Items.Add(r["LAST_NAME"].ToString() + " " + r["FIRST_NAME"].ToString());
             }
+        }
+
+        private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            parent.Show();
+            parent.textBox1.Clear();
+            parent.textBox2.Clear();
         }
     }
 }

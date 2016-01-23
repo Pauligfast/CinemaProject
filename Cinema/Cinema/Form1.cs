@@ -93,7 +93,7 @@ namespace Cinema
                         dataTable = new DataTable();
                         sqlDataAdapter.Fill(dataTable);
 
-                        sqlDataAdapter = new SqlDataAdapter("SELECT ID_CINEMA FROM EMPLOYEES e JOIN LOG_IN l ON l.ID_EMPLOYEE=e.ID_EMPLOYEE WHERE ID_LOGIN=" + dataTable.Rows[0][0].ToString(), selectConnection);
+                        sqlDataAdapter = new SqlDataAdapter("SELECT e.ID_EMPLOYEE FROM EMPLOYEES e JOIN LOG_IN l ON l.ID_EMPLOYEE=e.ID_EMPLOYEE WHERE ID_LOGIN=" + dataTable.Rows[0][0].ToString(), selectConnection);
                         dataTable = new DataTable();
                         sqlDataAdapter.Fill(dataTable);
                         UserForm userForm = new UserForm(this, connection, dataTable.Rows[0][0].ToString());
