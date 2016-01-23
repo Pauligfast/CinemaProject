@@ -4,7 +4,11 @@
 // MVID: 93C9DD96-8ED5-40E1-AA89-2D6DD39249D6
 // Assembly location: C:\Users\Paulig\Source\Repos\CinemaProject\Cinema\Cinema\obj\Debug\Cinema.exe
 
+using System;
 using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Cinema
@@ -23,11 +27,17 @@ namespace Cinema
         private TextBox textBox1;
         private Label label2;
         private Label label3;
+        private String loginCinema_ID;
+        private Form1 parent;
+        private String connection;
         private IContainer components = (IContainer) null;
 
-    public UserForm()
+    public UserForm(Form1 parent, String con, String logid)
     {
-      this.InitializeComponent();
+            loginCinema_ID = logid;
+            this.connection = con;
+            this.parent = parent;
+            this.InitializeComponent();
     }
 
     protected override void Dispose(bool disposing)
@@ -113,6 +123,7 @@ namespace Cinema
             // 
             // textBox3
             // 
+            this.textBox3.Enabled = false;
             this.textBox3.Location = new System.Drawing.Point(289, 57);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(160, 22);
@@ -120,6 +131,7 @@ namespace Cinema
             // 
             // textBox2
             // 
+            this.textBox2.Enabled = false;
             this.textBox2.Location = new System.Drawing.Point(289, 22);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(161, 22);
@@ -128,7 +140,7 @@ namespace Cinema
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(483, 17);
+            this.dataGridView1.Location = new System.Drawing.Point(475, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(413, 329);
@@ -136,6 +148,7 @@ namespace Cinema
             // 
             // textBox1
             // 
+            this.textBox1.Enabled = false;
             this.textBox1.Location = new System.Drawing.Point(8, 12);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
@@ -178,6 +191,7 @@ namespace Cinema
             this.Controls.Add(this.tabControl1);
             this.Name = "UserForm";
             this.Text = "UserForm";
+            this.Load += new System.EventHandler(this.UserForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -185,5 +199,17 @@ namespace Cinema
             this.ResumeLayout(false);
 
     }
-  }
+
+        private void UserForm_Load(object sender, EventArgs e)
+        {
+            SqlConnection selectConnection = new SqlConnection(connection);
+            selectConnection.Open();
+            SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT * FROM dbo.SESSIONS_IN_CINEMA ('" + loginCinema_ID + "')", selectConnection);
+            DataTable dataSet = new DataTable();
+            dataAdapter.Fill(dataSet);
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            dataGridView1.DataSource = dataSet;
+        }
+    }
 }

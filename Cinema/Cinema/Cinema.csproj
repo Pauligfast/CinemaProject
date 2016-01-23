@@ -75,6 +75,9 @@
     <EmbeddedResource Include="AdminForm.resx" />
     <EmbeddedResource Include="Form1.resx" />
     <EmbeddedResource Include="Properties\Resources.resx" />
+    <EmbeddedResource Include="UserForm.resx">
+      <DependentUpon>UserForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -88,7 +88,7 @@ namespace Cinema
                     {
                         if (!(dataTable.Rows[0][0].ToString() == "False"))
                             return;
-                        UserForm userForm = new UserForm();
+                        UserForm userForm = new UserForm(this, connection, dataTable.Rows[0][0].ToString());
                         this.Visible = false;
                         userForm.Show();
                     }
