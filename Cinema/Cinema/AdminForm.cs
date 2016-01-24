@@ -983,7 +983,7 @@ namespace Cinema
                 selectConnection.Open();
 
 
-                int d = int.Parse(textBox2.Text.ToString(), System.Globalization.CultureInfo.InvariantCulture);
+                decimal d = decimal.Parse(textBox2.Text.ToString(), System.Globalization.CultureInfo.InvariantCulture)/10000;
                 // decimal.Format(Convert.ToDecimal(textBox2.Text.ToString()));
                 SqlCommand command = new SqlCommand("UPDATE EMPLOYEES SET FIRST_NAME='" + textBox11.Text.ToString() + "', LAST_NAME='" + textBox3.Text.ToString() + "', SALARY=" + d + " WHERE FIRST_NAME='" + first + "' AND LAST_NAME='" + last + "'", selectConnection);
                 command.ExecuteNonQuery();
@@ -1214,7 +1214,7 @@ namespace Cinema
         void HandleSqlException(SqlException e)
         {
 
-            int num1 = (int)MessageBox.Show("Phone number has to contain 9 numbers", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            int num1 = (int)MessageBox.Show("Incorrect data", "OOPS", MessageBoxButtons.OK, MessageBoxIcon.Hand);
 
         }
 
