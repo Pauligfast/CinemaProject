@@ -53,7 +53,7 @@ namespace Cinema
             {
                 comboBox2.Items.Add(dataRow[0].ToString());
             }
-            int num1 = (int)MessageBox.Show(dateTimePicker1.Value.ToLongTimeString().ToString() + " " + dateTimePicker1.Value.ToShortDateString().ToString(), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            //int num1 = (int)MessageBox.Show(dateTimePicker1.Value.ToLongTimeString().ToString() + " " + dateTimePicker1.Value.ToShortDateString().ToString(), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Hand);
 
             for (int i = 0; i < 51; i++) {
                 comboBox3.Items.Add(i);
